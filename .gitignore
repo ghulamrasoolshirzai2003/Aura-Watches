@@ -1,0 +1,15 @@
+# OS Metadata
+.DS_Store
+Thumbs.db
+
+# IDE/Editor folders
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node modules (if you ever add them)
+node_modules/
+
+# Local Environment
+.env
