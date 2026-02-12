@@ -104,5 +104,5 @@ Aura-Watches/
 Copyright © 2026 Ghulam Rasool Shirzai. All Rights Reserved. Distributed under the MIT License. This project is open-source for educational and demonstration purposes.
 
 👨‍💻 Author
-Built with ❤️ by Ghulam Rasool Shirzai as a demonstration of Front-End Engineering, UI/UX Excellence, and Luxury E-Commerce Architecture.
-[Portfolio](https://ghulam-portfolio.web.app) | [LinkedIn](https://linkedin.com/in/ghulam-rasool-shirzai-13a6b4387)
+Built with ❤️ by Ghulam Rasool Shirzai as a demonstration of Front-End Engineering, UI/UX Excellence, and Luxury E-Commerce Architecture.[Portfolio](https://ghulam-portfolio.web.app) | [LinkedIn](https://linkedin.com/in/ghulam-rasool-shirzai-13a6b4387) 
+
