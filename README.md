@@ -105,3 +105,4 @@ Copyright © 2026 Ghulam Rasool Shirzai. All Rights Reserved. Distributed under 
 
 👨‍💻 Author
 Built with ❤️ by Ghulam Rasool Shirzai as a demonstration of Front-End Engineering, UI/UX Excellence, and Luxury E-Commerce Architecture.
+[Portfolio](https://ghulam-portfolio.web.app) | [LinkedIn](https://linkedin.com/in/ghulam-rasool-shirzai-13a6b4387)
