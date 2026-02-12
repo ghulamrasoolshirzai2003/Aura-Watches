@@ -1,10 +1,12 @@
-⌚ Aura Watches: Premium E-Commerce EngineeringA high-performance, responsive, and visually immersive Full-Stack landing page for luxury timepieces. This project demonstrates modern UI/UX principles, interactive front-end logic, and a scalable architecture.Getty Images Explore 🎯 FeaturesGlassmorphism Design: A modern, semi-transparent UI with neon accents that reflects the luxury of premium watches.Dynamic Product Catalog: Interactive hover states and high-resolution image rendering optimized for performance.Mobile-First Responsive Design: Seamlessly transitions from 4K desktop monitors to small-screen mobile devices.Interactive Shopping Logic: (Describe your JS features here, e.g., "Real-time cart updates and local storage persistence").SEO Optimized: Semantic HTML5 structure for better search engine indexing.🏗️ ArchitectureFrontendHTML5 / CSS3: Utilizing Flexbox, CSS Grid, and Custom Properties for a modular design.JavaScript (ES6+): Modular script structure for DOM manipulation and event handling.Framer Motion (Optional): Smooth entry animations and scroll-triggered effects.Tailwind CSS: For rapid, utility-first styling and consistent spacing.Backend & Automation (Integration Ready)n8n Workflows: Ready for automated order notifications and customer lead management.Firebase / PHP: (Select your choice) Backend integration for handling product data and user inquiries.📦 InstallationPrerequisitesA modern web browser (Chrome, Firefox, or Edge).Live Server extension (for VS Code) or any local hosting environment.1. Clone the ProjectBashgit clone https://github.com/ghulamrasoolshirzai2003/Aura-Watches.git
-2. Run LocallyNavigate to the project folder: cd Aura-WatchesOpen index.html in your browser, or right-click and select "Open with Live Server".🛠️ Technology StackCategoryTechnologyLanguageHTML5, CSS3, JavaScript (ES6)StylingTailwind CSS / Custom CSSVersion ControlGit & GitHubAutomationn8n (Planned Integration)DeploymentGitHub Pages / Vercel📝 Project StructurePlaintextAura-Watches/
-├── assets/
-│   ├── img/          # Compressed high-res watch images
-│   ├── css/          # Modular stylesheet architecture
-│   └── js/           # Interactive logic scripts
-├── index.html        # Primary entry point
-├── .gitignore        # Files to exclude from Git
-└── README.md         # Professional documentation
-🚧 Future Enhancements[ ] Dark/Light Mode: Intelligent theme toggling based on user system preference.[ ] E-commerce Backend: Full integration with a database for real-time stock management.[ ] AI Recommendation: Using Gemini AI to suggest watches based on user browsing history.[ ] Payment Gateway: Integration with Stripe for secure transactions.📄 LicenseCopyright © 2026 Ghulam Rasool Shirzai.Distributed under the MIT License. This project is open-source; feel free to use, modify, and distribute it as you see fit.👨‍💻 Author Ghulam Rasool Shirzai
+⌚ Aura Watches: Premium E-Commerce Engineering
+A high-performance, responsive, and visually immersive Full-Stack landing page for luxury timepieces. This project demonstrates modern UI/UX principles, interactive front-end logic, and a scalable architecture.
+🎯 Features
+Glassmorphism Design: A modern, semi-transparent UI with neon accents that reflects the luxury of premium watches.
+
+Dynamic Product Catalog: Interactive hover states and high-resolution image rendering optimized for performance.
+
+Mobile-First Responsive Design: Seamlessly transitions from 4K desktop monitors to small-screen mobile devices.
+
+Interactive Shopping Logic: (Describe your JS features here, e.g., "Real-time cart updates and local storage persistence").
+
+SEO Optimized: Semantic HTML5 structure for better search engine indexing.
