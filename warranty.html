@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Warranty | AURA</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700" rel="stylesheet"/>
+    <script>
+        tailwind.config = { 
+            darkMode: "class", 
+            theme: { 
+                extend: { 
+                    colors: { "primary": "#0dccf2", "background-dark": "#101f22" }, 
+                    fontFamily: { "display": ["Space Grotesk", "sans-serif"] } 
+                } 
+            } 
+        }
+    </script>
+    <style>
+        .glass-panel { background: rgba(16, 31, 34, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .neon-glow:hover { box-shadow: 0 0 20px rgba(13, 204, 242, 0.3); }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-white antialiased overflow-x-hidden">
+
+    <header class="fixed top-0 w-full z-50 glass-panel border-b border-white/10">
+        <div class="max-w-[1400px] mx-auto px-8 h-24 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-5 group no-underline shrink-0 transition-transform active:scale-95">
+                <div class="relative size-14 flex items-center justify-center">
+                    <div class="absolute inset-0 border-2 border-white/10 rounded-full group-hover:border-primary/40 transition-all duration-700 group-hover:scale-110"></div>
+                    <svg class="size-8 text-white group-hover:text-primary transition-all duration-700 ease-in-out transform group-hover:rotate-[360deg]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10" stroke-width="1" />
+                        <path d="M12 6v6l3 2" stroke-width="1.5" stroke-linecap="round" />
+                        <path d="M12 3v1M12 20v1M3 12h1M20 12h1" stroke-width="1" />
+                    </svg>
+                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                </div>
+                <div class="flex flex-col text-left">
+                    <h2 class="text-3xl font-light tracking-[0.4em] text-white transition-all duration-500 group-hover:tracking-[0.5em] group-hover:text-primary">AURA</h2>
+                    <span class="text-[9px] tracking-[0.7em] text-slate-500 uppercase font-medium group-hover:text-white transition-colors duration-700">Chronos Edition</span>
+                </div>
+            </a>
+            <a href="index.html" class="text-xs font-bold uppercase tracking-widest text-primary border border-primary/20 px-6 py-2 rounded-full hover:bg-primary hover:text-background-dark transition-all">Back to Home</a>
+        </div>
+    </header>
+
+    <main class="pt-48 pb-20 px-6 max-w-[1000px] mx-auto">
+        <div class="text-center mb-16">
+            <span class="text-primary text-xs font-bold uppercase tracking-[0.5em] mb-4 block">Protection Plan</span>
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter mb-8 italic">WARRANTY <span class="text-primary">& CARE</span></h1>
+            <p class="text-slate-400 font-body text-lg max-w-2xl mx-auto">Your AURA Chronos is engineered for a lifetime. We stand behind our craftsmanship with industry-leading protection.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="glass-panel p-10 rounded-[32px] border border-white/10">
+                <h3 class="text-2xl font-bold mb-6 italic text-primary">Standard Coverage</h3>
+                <ul class="space-y-6">
+                    <li class="flex gap-4">
+                        <span class="material-symbols-outlined text-primary">verified_user</span>
+                        <div>
+                            <h4 class="font-bold text-white">2-Year Limited Warranty</h4>
+                            <p class="text-slate-400 text-sm font-body mt-1">Covers all manufacturing defects in materials and workmanship under normal use.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <span class="material-symbols-outlined text-primary">battery_charging_full</span>
+                        <div>
+                            <h4 class="font-bold text-white">Battery Health Guarantee</h4>
+                            <p class="text-slate-400 text-sm font-body mt-1">One-time graphene battery replacement if capacity drops below 80% within the first year.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="glass-panel p-10 rounded-[32px] border border-white/10 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 italic text-primary">File a Claim</h3>
+                    <p class="text-slate-400 font-body mb-8 leading-relaxed">Need a repair or replacement? Start your claim online. Our technical team will review your request and contact you within 24 hours.</p>
+                </div>
+                <a href="contact.html" class="w-full bg-primary text-background-dark py-4 rounded-xl text-center text-xs font-black uppercase tracking-widest transition-all neon-glow no-underline shadow-[0_0_20px_rgba(13,204,242,0.3)]">
+    Start Claim Process
+</a>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

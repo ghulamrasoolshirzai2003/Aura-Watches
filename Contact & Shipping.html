@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Aura Pre-order Checkout</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: { "primary": "#0dccf2", "background-dark": "#101f22", "input-dark": "#1c2e32" },
+                    fontFamily: { "display": ["Space Grotesk", "sans-serif"] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel { background: rgba(16, 31, 34, 0.9); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        @keyframes shimmer { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+        .shimmer-text { background: linear-gradient(to right, #cbd5e1, #ffffff, #64748b); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 5s linear infinite; }
+        .active-selection { border-color: #0dccf2 !important; transform: scale(1.1); box-shadow: 0 0 15px rgba(13, 204, 242, 0.4); }
+        <style>
+    /* 1. Force the whole page to never scroll */
+    body, html {
+        height: 100%;
+        overflow: hidden !important;
+    }
+
+    /* 2. Make the glass box fit the screen height exactly */
+    .glass-panel {
+        background: rgba(16, 31, 34, 0.9);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        max-height: 90vh !important; /* Forces the box to stay within the view */
+    }
+
+    /* 3. The IMAGE: This is usually what pushes things down. 
+       We force it to be smaller. */
+    #display-img {
+    max-height: 140px;
+    width: auto;
+    object-fit: contain;
+}
+
+.watch-image-wrapper {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+
+    /* 4. Reduce spacing everywhere to pull content up */
+    .p-10, .p-12, .p-8 {
+        padding: 1.25rem !important; 
+    }
+
+    .mb-8, .mb-10, .mb-6 {
+        margin-bottom: 0.75rem !important;
+    }
+
+    /* 5. Compact the 10-watch grid */
+    #checkout-palette {
+        display: grid !important;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px !important;
+    }
+
+    #checkout-palette button {
+        width: 32px !important;
+        height: 32px !important;
+        flex-shrink: 0;
+    }
+
+    /* 6. Text sizes */
+    #display-name { font-size: 1.25rem !important; }
+    #display-desc { font-size: 10px !important; line-height: 1.2; }
+
+    /* 7. Ensure the right side (form) scrolls if needed, but the left stays still */
+    .overflow-y-auto {
+        scrollbar-width: thin;
+        scrollbar-color: #0dccf2 transparent;
+    }
+    #watch-glow {
+    transform: scale(0.8);
+}
+
+</style>
+    </style>
+</head>
+<body class="bg-background-dark font-display antialiased overflow-hidden h-screen w-full relative">
+
+<div class="relative z-10 flex h-full w-full items-center justify-center p-4">
+    <div class="glass-panel w-full max-w-6xl max-h-[95vh] rounded-[40px] shadow-2xl flex flex-col md:flex-row overflow-hidden border border-white/10">
+        
+        <div class="w-full md:w-1/2 bg-black/30 p-8 flex flex-col justify-between border-r border-white/5 relative">
+            <div class="relative z-10">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <span class="text-primary text-[10px] font-black uppercase tracking-[0.4em] mb-1 block">Step 1: Choose Your Edition</span>
+                        <h2 id="display-series" class="text-white text-[10px] font-bold tracking-[0.2em] uppercase opacity-60 italic">Signature Chronos</h2>
+                    </div>
+                    <h2 id="display-price" class="text-3xl font-bold text-white tracking-tighter shimmer-text leading-none">$299</h2>
+                </div>
+
+                <div class="relative watch-image-wrapper rounded-[24px] bg-white/5 flex items-center justify-center mb-6 border border-white/5">
+
+
+    <!-- LEFT ARROW -->
+    <button onclick="prevWatch()"
+        class="absolute left-2 top-1/2 -translate-y-1/2 z-20 
+               bg-black/40 hover:bg-black/60 
+               rounded-full p-2 border border-white/10 transition">
+        <span class="material-symbols-outlined text-white text-lg">
+            chevron_left
+        </span>
+    </button>
+
+    <!-- GLOW -->
+    <div id="watch-glow"
+        class="absolute inset-0 blur-[60px] rounded-full opacity-30 transition-all duration-700"></div>
+
+    <!-- WATCH IMAGE -->
+    <img id="display-img"
+        src="Photos/neon cyan1.png"
+        class="w-[60%] h-auto object-contain transition-all duration-500"
+        alt="Watch">
+
+    <!-- RIGHT ARROW -->
+    <button onclick="nextWatch()"
+        class="absolute right-2 top-1/2 -translate-y-1/2 z-20 
+               bg-black/40 hover:bg-black/60 
+               rounded-full p-2 border border-white/10 transition">
+        <span class="material-symbols-outlined text-white text-lg">
+            chevron_right
+        </span>
+    </button>
+
+</div>
+
+
+                <div class="space-y-3 mb-6">
+                    <div class="flex justify-between items-center">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Select Color (10 Available)</span>
+                        <span id="display-name" class="text-primary text-xs font-bold italic">Neon Cyan</span>
+                    </div>
+                    <div id="checkout-palette" class="grid grid-cols-5 gap-3 p-1">
+                        </div>
+                </div>
+
+                <p id="display-desc" class="text-slate-400 text-[11px] font-body leading-relaxed mb-6 border-l border-primary/30 pl-3">
+                    Aerospace-grade titanium paired with our signature neon finish.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 pt-6 border-t border-white/10 relative z-10">
+                <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+                    <span class="text-[8px] text-slate-500 uppercase font-black block mb-1">Casing</span>
+                    <span id="display-material" class="text-white text-[11px] font-bold">Titanium G5</span>
+                </div>
+                <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+                    <span class="text-[8px] text-slate-500 uppercase font-black block mb-1">Battery</span>
+                    <span id="display-battery" class="text-white text-[11px] font-bold">7 Days</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full md:w-1/2 flex flex-col bg-transparent overflow-y-auto">
+            <div class="px-10 py-8 sticky top-0 bg-[#101f22]/95 backdrop-blur-md z-20 border-b border-white/5 flex justify-between items-center">
+                <h1 class="text-white text-xl font-bold flex items-center gap-4 italic tracking-tight">
+                    <span class="material-symbols-outlined text-primary text-3xl">local_shipping</span> 2. Shipping Details
+                </h1>
+                <button onclick="window.location.href='index.html'" class="text-slate-500 hover:text-white transition-colors">
+                    <span class="material-symbols-outlined text-3xl">close</span>
+                </button>
+            </div>
+
+            <div class="px-10 py-10 flex-1">
+                <form id="preorder-form" class="space-y-8">
+    <div class="space-y-4">
+        <label class="text-primary text-[10px] font-black uppercase tracking-widest ml-1">Contact Email</label>
+        <input id="ship-email" name="email" class="w-full bg-input-dark text-white rounded-xl border border-white/5 focus:border-primary px-4 py-4 outline-none transition-all" type="email" placeholder="email@address.com" required>
+    </div>
+
+    <div class="space-y-4">
+        <label class="text-primary text-[10px] font-black uppercase tracking-widest ml-1">Shipping Address</label>
+        <div class="grid grid-cols-2 gap-4">
+            <input id="ship-first-name" name="first_name" class="bg-input-dark text-white rounded-xl border border-white/5 focus:border-primary px-4 py-4 outline-none" type="text" placeholder="First Name" required>
+            <input id="ship-last-name" name="last_name" class="bg-input-dark text-white rounded-xl border border-white/5 focus:border-primary px-4 py-4 outline-none" type="text" placeholder="Last Name" required>
+        </div>
+        <input id="ship-address" name="address" class="w-full bg-input-dark text-white rounded-xl border border-white/5 focus:border-primary px-4 py-4 outline-none" type="text" placeholder="Full Street Address" required>
+        <div class="grid grid-cols-2 gap-4">
+            <input id="ship-city" name="city" class="bg-input-dark text-white rounded-xl border border-white/5 focus:border-primary px-4 py-4 outline-none" type="text" placeholder="City" required>
+            <input id="ship-postal" name="postal_code" class="bg-input-dark text-white rounded-xl border border-white/5 focus:border-primary px-4 py-4 outline-none" type="text" placeholder="Postal Code" required>
+        </div>
+    </div>
+</form>
+            </div>
+
+            <div class="px-10 py-8 border-t border-white/5 bg-[#101f22]/95 backdrop-blur-md sticky bottom-0 flex justify-between items-center">
+                <button onclick="window.location.href='index.html'" class="text-slate-500 hover:text-white text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 transition-all">
+                    <span class="material-symbols-outlined text-sm">arrow_back</span> Return to site
+                </button>
+                <button form="preorder-form" type="submit" class="bg-primary hover:bg-cyan-400 text-background-dark font-black px-10 py-4 rounded-xl text-[10px] uppercase tracking-widest transition-all neon-glow flex items-center gap-2">
+                    Continue to Payment <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const auraWatches = [
+      { name: "Neon Cyan", series: "Signature Chronos", price: "$299", color: "#0dccf2", casing: "Titanium G5", battery: "7 Days", img: "Photos/neon cyan1.png", desc: "Aerospace-grade titanium paired with our signature neon finish." },
+      { name: "Solar Gold", series: "Signature Chronos", price: "$329", color: "#fbbf24", casing: "Titanium G5", battery: "6 Days", img: "Photos/Solar Gold.png", desc: "Luxury gold anodization inspired by solar radiance." },
+      { name: "Obsidian Black", series: "Stealth Edition", price: "$349", color: "#020617", casing: "Carbon Fiber", battery: "8 Days", img: "Photos/Obsidian Black.png", desc: "Matte carbon fiber body built for absolute stealth." },
+      { name: "Crimson Pulse", series: "Limited Run", price: "$339", color: "#ef4444", casing: "Titanium G5", battery: "6 Days", img: "Photos/crimson pulse.png", desc: "High-energy crimson finish with aggressive styling." },
+      { name: "Aurora Violet", series: "Limited Run", price: "$359", color: "#8b5cf6", casing: "Titanium G5", battery: "7 Days", img: "Photos/Aurora Violet.png", desc: "Shifting violet tones inspired by aurora skies." },
+      { name: "Arctic Silver", series: "Signature Chronos", price: "$319", color: "#cbd5e1", casing: "Titanium G5", battery: "7 Days", img: "Photos/Arctic Silver.png", desc: "Minimalist silver finish inspired by polar landscapes." },
+      { name: "Forest Green", series: "Expedition Edition", price: "$339", color: "#166534", casing: "Carbon Fiber", battery: "8 Days", img: "Photos/Forest Green.png", desc: "Rugged green tone designed for outdoor exploration." },
+      { name: "Midnight Blue", series: "Signature Chronos", price: "$329", color: "#1e3a8a", casing: "Titanium G5", battery: "7 Days", img: "Photos/Midnight Blue.png", desc: "Deep blue finish reflecting the calm of midnight skies." },
+      { name: "Rose Quartz", series: "Elegance Edition", price: "$349", color: "#f472b6", casing: "Titanium G5", battery: "6 Days", img: "Photos/Rose Quartz.png", desc: "Soft rose tone crafted for refined elegance." },
+      { name: "Inferno Orange", series: "Sport Edition", price: "$329", color: "#f97316", casing: "Carbon Fiber", battery: "7 Days", img: "Photos/Inferno Orange.png", desc: "High-visibility orange built for extreme performance." }
+    ];
+    let currentIndex = 0;
+
+function nextWatch() {
+    currentIndex = (currentIndex + 1) % auraWatches.length;
+    updateSelection(currentIndex);
+}
+
+function prevWatch() {
+    currentIndex = (currentIndex - 1 + auraWatches.length) % auraWatches.length;
+    updateSelection(currentIndex);
+}
+
+
+    const palette = document.getElementById('checkout-palette');
+    
+    auraWatches.forEach((watch, index) => {
+        const btn = document.createElement('button');
+        btn.className = "w-10 h-10 rounded-full border-2 border-white/20 transition-all hover:scale-110";
+        btn.style.backgroundColor = watch.color;
+        btn.onclick = (e) => {
+            e.preventDefault();
+            updateSelection(index);
+        };
+        palette.appendChild(btn);
+    });
+
+    function updateSelection(index) {
+    currentIndex = index;
+    const w = auraWatches[index];
+
+    document.getElementById('display-name').innerText = w.name;
+    document.getElementById('display-series').innerText = w.series;
+    document.getElementById('display-price').innerText = w.price;
+    document.getElementById('display-desc').innerText = w.desc;
+    document.getElementById('display-material').innerText = w.casing;
+    document.getElementById('display-battery').innerText = w.battery;
+
+    const img = document.getElementById('display-img');
+    const glow = document.getElementById('watch-glow');
+
+    img.style.opacity = "0";
+
+    setTimeout(() => {
+        img.src = w.img;
+        img.style.opacity = "1";
+        glow.style.backgroundColor = w.color;
+    }, 150);
+
+    document.querySelectorAll('#checkout-palette button').forEach((btn, i) => {
+        btn.classList.toggle('active-selection', i === index);
+    });
+}
+
+
+    document.getElementById('preorder-form').onsubmit = (e) => {
+    e.preventDefault();
+
+    // 1. Grab the values using the new IDs
+    const customerData = {
+        firstName: document.getElementById('ship-first-name').value,
+        lastName: document.getElementById('ship-last-name').value,
+        address: document.getElementById('ship-address').value,
+        city: document.getElementById('ship-city').value,
+        zip: document.getElementById('ship-postal').value,
+        email: document.getElementById('ship-email').value
+    };
+
+    // 2. Save the customer details to memory
+    localStorage.setItem('customerShippingData', JSON.stringify(customerData));
+
+    // 3. Save the watch selection index again to ensure it carries over
+    localStorage.setItem('selectedWatchIndex', currentIndex);
+
+    // 4. Move to payment page
+    window.location.href = 'Payment & Confirmation.html';
+};
+
+   // This checks if the user picked a watch on the index page
+window.onload = () => {
+    const savedIndex = localStorage.getItem('selectedWatchIndex');
+    if (savedIndex !== null) {
+        // If a watch was picked, show that specific one
+        updateSelection(parseInt(savedIndex));
+    } else {
+        // Otherwise, show the first one by default
+        updateSelection(0);
+    }
+};
+</script>
+
+</body>
+</html>

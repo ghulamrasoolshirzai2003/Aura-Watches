@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aura Referral Dashboard</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0ddff2",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#102122",
+                        "neon-violet": "#a855f7",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    },
+                    animation: {
+                        'float': 'float 10s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(-20px) scale(1.05)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: 0.6 },
+                            '50%': { opacity: 1 },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style>.perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #102122; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a4042; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b5254; 
+        }.bg-particles {
+            background-color: #102122;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            animation: bg-move 60s linear infinite;
+        }
+        @keyframes bg-move {
+            0% { background-position: 0 0, 40px 60px, 130px 270px; }
+            100% { background-position: 550px 550px, 390px 410px, 680px 820px; }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-hidden h-screen flex relative">
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+<div class="bg-particles absolute inset-0 opacity-20"></div>
+<div class="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[120px] animate-float"></div>
+<div class="absolute top-[40%] -right-[10%] w-[40%] h-[60%] bg-neon-violet/10 rounded-full blur-[100px] animate-float" style="animation-delay: 2s;"></div>
+</div>
+<aside class="w-full md:w-[380px] lg:w-[420px] h-full flex flex-col border-r border-white/5 bg-[#102122]/80 backdrop-blur-xl relative z-20 shadow-[0_0_50px_-20px_rgba(168,85,247,0.4)]">
+<div class="p-8 pb-4 flex flex-col items-center gap-6">
+<div class="relative group cursor-pointer">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-neon-violet rounded-full blur opacity-40 group-hover:opacity-75 transition duration-500"></div>
+<div class="relative bg-center bg-no-repeat bg-cover rounded-full h-28 w-28 border-2 border-white/10" data-alt="User profile picture, futuristic portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDryiefqOJ73GfUfUhedF9PZ91K0NMokIZUYtV5Ejo2Ur2QqoE31tvrJadp_XbucrmNoM07NKfhZN-0SlDCdjSjRmdyT04kSJK8MeG1LPcpj-rHBsFSXnBGeYj1m7N7wahldTpkh-VAFohF51DEc7MhS_QlHBHuvr_gg-tdhDTunOnFlsdrVsV74E5Ezi7TDJKHKX3gwnkzaYvZcsmNSDeyAVDUWy_80NYGwLJJdJnDn-LGG48-IhTHZks01raHV3koQQaJstIahIo");'></div>
+<div class="absolute bottom-1 right-1 bg-background-dark border border-white/20 rounded-full p-1.5 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[16px] leading-none">verified</span>
+</div>
+</div>
+<div class="text-center">
+<h2 class="text-2xl font-bold tracking-tight text-white mb-1">Hello, Alex</h2>
+<div class="inline-flex items-center px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+<span class="material-symbols-outlined text-neon-violet text-[16px] mr-1.5">diamond</span>
+<span class="text-sm font-medium text-gray-300">Platinum Member</span>
+</div>
+</div>
+</div>
+<div class="w-full px-8 opacity-20"><div class="h-px bg-gradient-to-r from-transparent via-white to-transparent"></div></div>
+<div class="p-8 flex flex-col gap-6">
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10 p-6 shadow-lg group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-white">bolt</span>
+</div>
+<div class="flex flex-col gap-1 relative z-10">
+<span class="text-gray-400 text-sm font-medium uppercase tracking-wider">Total Balance</span>
+<div class="flex items-baseline gap-2">
+<span class="text-5xl font-bold text-white tracking-tighter drop-shadow-[0_0_15px_rgba(13,223,242,0.5)]">2,450</span>
+<span class="text-primary font-bold">PTS</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-xs text-green-400 bg-green-400/10 w-fit px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span>+120 this week</span>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-end">
+<span class="text-white font-medium text-sm">Tier Progress</span>
+<span class="text-neon-violet text-xs font-bold">Diamond Tier Next</span>
+</div>
+<div class="h-2 w-full bg-[#1c2e30] rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-neon-violet w-[75%] rounded-full shadow-[0_0_10px_rgba(13,223,242,0.6)]"></div>
+</div>
+<div class="text-right text-gray-400 text-xs">750 pts to upgrade</div>
+</div>
+</div>
+<div class="mt-auto p-8 border-t border-white/5 bg-black/20">
+<p class="text-gray-400 text-xs uppercase tracking-widest text-center mb-4 font-semibold">Quick Share</p>
+<div class="flex justify-center gap-4">
+<button class="group flex items-center justify-center w-12 h-12 rounded-xl bg-[#1c2e30] hover:bg-[#283839] border border-white/5 transition-all hover:scale-110">
+<span class="material-symbols-outlined text-white group-hover:text-[#1DA1F2]">share</span> 
+</button>
+<button class="group flex items-center justify-center w-12 h-12 rounded-xl bg-[#1c2e30] hover:bg-[#283839] border border-white/5 transition-all hover:scale-110">
+<span class="material-symbols-outlined text-white group-hover:text-[#25D366]">chat</span> 
+</button>
+<button class="group flex items-center justify-center w-12 h-12 rounded-xl bg-[#1c2e30] hover:bg-[#283839] border border-white/5 transition-all hover:scale-110">
+<span class="material-symbols-outlined text-white group-hover:text-[#5865F2]">chat</span> 
+</button>
+</div>
+</div>
+</aside>
+<main class="flex-1 h-full overflow-y-auto relative z-10 scroll-smooth pr-0 lg:pr-[350px] transition-all duration-300">
+<div class="container mx-auto p-8 pt-12 pb-32">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<h1 class="text-4xl md:text-5xl font-bold text-white mb-2 tracking-tight">Available Rewards</h1>
+<p class="text-gray-400 max-w-lg text-lg">Flip cards to see requirements. Share your unique link to unlock premium Aura gear.</p>
+</div>
+<div class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-4 py-2 backdrop-blur-sm">
+<span class="material-symbols-outlined text-gray-400">filter_list</span>
+<span class="text-sm font-medium text-gray-300">Filter by Tier</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+<div class="group h-[420px] w-full perspective-1000 cursor-pointer">
+<div class="relative h-full w-full transition-all duration-700 transform-style-3d group-hover:rotate-y-180 shadow-2xl rounded-2xl">
+<div class="absolute inset-0 h-full w-full backface-hidden rounded-2xl overflow-hidden bg-[#162627] border border-white/10">
+<div class="h-2/3 w-full bg-cover bg-center" data-alt="Close up of a dark carbon fiber watch band" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzhxbPWbI-0LlPPaTGHhruKIHiGv3XoTBaAl5-QMIevf7H_Y2q32AswqJ5vwrjnaYpq7yruKXlpL3yBuzDdqmnQeH199InAvthDN60qLPpAhBF8jdAH8sHl5uZjEgAaPcHTF-lZLLi3IW9bomjuAJKaCXoSrinWuoUEYFMjRKuw8GgJPOHwSRGk5SUp3hs1TINJ4_zfndvUY7TXXkXzLyHpw6i2sLvHmbf8Xx03mcizYp3iXiRCja_CEsXov4ihlddL0e0VNXxoo8');">
+<div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded text-xs font-bold text-white border border-white/10 uppercase tracking-wider">Most Popular</div>
+</div>
+<div class="h-1/3 p-6 flex flex-col justify-between bg-gradient-to-b from-[#162627] to-[#0e1a1b]">
+<div>
+<h3 class="text-xl font-bold text-white mb-1">Stealth Carbon Band</h3>
+<p class="text-gray-400 text-sm">Ultra-lightweight premium accessory</p>
+</div>
+<div class="flex items-center gap-2 text-primary text-sm font-bold">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span>Hover to View Details</span>
+</div>
+</div>
+</div>
+<div class="absolute inset-0 h-full w-full rotate-y-180 backface-hidden rounded-2xl bg-[#0e1a1b] border border-primary/50 flex flex-col p-8 justify-between shadow-[0_0_30px_rgba(13,223,242,0.15)]">
+<div class="flex flex-col items-center text-center gap-4 mt-4">
+<div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-3xl text-primary">group_add</span>
+</div>
+<h3 class="text-2xl font-bold text-white">Requirement</h3>
+<p class="text-gray-300">Refer <span class="text-primary font-bold">5 friends</span> to unlock this reward.</p>
+<div class="w-full mt-4">
+<div class="flex justify-between text-xs mb-2">
+<span class="text-gray-400">Progress</span>
+<span class="text-white font-bold">3/5</span>
+</div>
+<div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[60%]"></div>
+</div>
+</div>
+</div>
+<button class="w-full py-3 rounded-lg bg-primary hover:bg-primary/90 text-background-dark font-bold transition-colors flex items-center justify-center gap-2">
+<span>Copy Referral Link</span>
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group h-[420px] w-full perspective-1000 cursor-pointer">
+<div class="relative h-full w-full transition-all duration-700 transform-style-3d group-hover:rotate-y-180 shadow-2xl rounded-2xl">
+<div class="absolute inset-0 h-full w-full backface-hidden rounded-2xl overflow-hidden bg-[#162627] border border-white/10">
+<div class="h-2/3 w-full bg-cover bg-center" data-alt="Abstract neon digital interface visualization" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAZOXi2IgSUFDcw0UFWYsRCKQTZ2n_1fcmsy8rQexh3FgAJqkIvnKQQ5HZvPYTxT7b0znVQxP6sK5Gxgg2L6PxxiSgl3AjK1vrIaBKZgDCWm0VuGv0beSv1J7XqISlhGt_GerFF3WkW7JmHD1PRG0UX2oITy0y-EiqWleYSiJtUMitT4fLPeocHgGREqSD-9BgOa4JExoA99ZwnzFUnSAOEt1G2KsCHionzik0Hz2yi8J8P1TILWVuuNPftJNUieFKHGUf0-MzRSn8');"></div>
+<div class="h-1/3 p-6 flex flex-col justify-between bg-gradient-to-b from-[#162627] to-[#0e1a1b]">
+<div>
+<h3 class="text-xl font-bold text-white mb-1">1 Month Premium</h3>
+<p class="text-gray-400 text-sm">Access all pro features instantly</p>
+</div>
+<div class="flex items-center gap-2 text-primary text-sm font-bold">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span>Hover to View Details</span>
+</div>
+</div>
+</div>
+<div class="absolute inset-0 h-full w-full rotate-y-180 backface-hidden rounded-2xl bg-[#0e1a1b] border border-neon-violet/50 flex flex-col p-8 justify-between shadow-[0_0_30px_rgba(168,85,247,0.15)]">
+<div class="flex flex-col items-center text-center gap-4 mt-4">
+<div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-3xl text-neon-violet">stars</span>
+</div>
+<h3 class="text-2xl font-bold text-white">Requirement</h3>
+<p class="text-gray-300">Refer <span class="text-neon-violet font-bold">2 friends</span> to unlock this reward.</p>
+<div class="w-full mt-4">
+<div class="flex justify-between text-xs mb-2">
+<span class="text-gray-400">Progress</span>
+<span class="text-white font-bold">0/2</span>
+</div>
+<div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-neon-violet w-[5%]"></div>
+</div>
+</div>
+</div>
+<button class="w-full py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white font-bold border border-white/20 transition-colors flex items-center justify-center gap-2">
+<span>Copy Referral Link</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group h-[420px] w-full perspective-1000 cursor-pointer">
+<div class="relative h-full w-full transition-all duration-700 transform-style-3d group-hover:rotate-y-180 shadow-2xl rounded-2xl">
+<div class="absolute inset-0 h-full w-full backface-hidden rounded-2xl overflow-hidden bg-[#162627] border border-white/10">
+<div class="h-2/3 w-full bg-cover bg-center" data-alt="Modern smart scale on dark floor" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBz9Z-i6WT4MBqeVtugv4Y46MnSyt1YFjmVTiqusp0WW2RWlZ6mwjT1LKZdMWqIY1BjcimYbqgL3oMwEPMojtYmPfZEWnPOreW2aIUHeEKXn0Thu_LZlXAg00ApdLYtYb2ReXwSJ-LjtQi7w5JJvNAVraxctbNebjlGyznJ20x2hV8WqMTJGUSNiNOMWxvhdbpvEiwqGpzVJwA1VJlQhmcM4bJ9GUMXIKe5ygR4Oc4Q_eVuwXX2eaDmp_jSDLCZah_7B6VUBrwUHRk');">
+<div class="absolute top-4 left-4 bg-neon-violet text-white px-3 py-1 rounded text-xs font-bold uppercase tracking-wider shadow-lg">50% Off</div>
+</div>
+<div class="h-1/3 p-6 flex flex-col justify-between bg-gradient-to-b from-[#162627] to-[#0e1a1b]">
+<div>
+<h3 class="text-xl font-bold text-white mb-1">Aura Smart Scale</h3>
+<p class="text-gray-400 text-sm">Complete body composition analysis</p>
+</div>
+<div class="flex items-center gap-2 text-primary text-sm font-bold">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span>Hover to View Details</span>
+</div>
+</div>
+</div>
+<div class="absolute inset-0 h-full w-full rotate-y-180 backface-hidden rounded-2xl bg-[#0e1a1b] border border-primary/50 flex flex-col p-8 justify-between shadow-[0_0_30px_rgba(13,223,242,0.15)]">
+<div class="flex flex-col items-center text-center gap-4 mt-4">
+<div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-3xl text-primary">monitor_weight</span>
+</div>
+<h3 class="text-2xl font-bold text-white">Requirement</h3>
+<p class="text-gray-300">Refer <span class="text-primary font-bold">10 friends</span> to unlock this reward.</p>
+<div class="w-full mt-4">
+<div class="flex justify-between text-xs mb-2">
+<span class="text-gray-400">Progress</span>
+<span class="text-white font-bold">5/10</span>
+</div>
+<div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[50%]"></div>
+</div>
+</div>
+</div>
+<button class="w-full py-3 rounded-lg bg-primary hover:bg-primary/90 text-background-dark font-bold transition-colors flex items-center justify-center gap-2">
+<span>Copy Referral Link</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group h-[420px] w-full perspective-1000 cursor-pointer">
+<div class="relative h-full w-full transition-all duration-700 transform-style-3d group-hover:rotate-y-180 shadow-2xl rounded-2xl">
+<div class="absolute inset-0 h-full w-full backface-hidden rounded-2xl overflow-hidden bg-[#162627] border border-white/10">
+<div class="h-2/3 w-full bg-cover bg-center" data-alt="Futuristic headphones with neon lighting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCCFPXFj5XuphDMGENu3-Xv5QWNL4VU3tRVOVfVSW6LOtVeDgzHjSAHibiSJFCnqJLBJb-aLsWaQGUTx7eqZUfA2AoTVB--Zfgt4N3XjFFE8qIttqTQdTBNNIwfsYfws-4HYRPNFyucUV7OSxhDbMIirPbeIK7cWzVxPqQ2UwhN2WlBzyHQk_x-GenD2ihD0PxGKTvKOCL7nkCQCXa6EXHOVEI1ZzauCOgPhOcrnkJgJvtP4T4MMhoysaP_9urkf9fXtBqoEAgdngc');"></div>
+<div class="h-1/3 p-6 flex flex-col justify-between bg-gradient-to-b from-[#162627] to-[#0e1a1b]">
+<div>
+<h3 class="text-xl font-bold text-white mb-1">Sonic Earbuds</h3>
+<p class="text-gray-400 text-sm">Noise cancelling, 30h battery</p>
+</div>
+<div class="flex items-center gap-2 text-primary text-sm font-bold">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span>Hover to View Details</span>
+</div>
+</div>
+</div>
+<div class="absolute inset-0 h-full w-full rotate-y-180 backface-hidden rounded-2xl bg-[#0e1a1b] border border-primary/50 flex flex-col p-8 justify-between shadow-[0_0_30px_rgba(13,223,242,0.15)]">
+<div class="flex flex-col items-center text-center gap-4 mt-4">
+<div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-3xl text-primary">headphones</span>
+</div>
+<h3 class="text-2xl font-bold text-white">Requirement</h3>
+<p class="text-gray-300">Refer <span class="text-primary font-bold">15 friends</span> to unlock this reward.</p>
+<div class="w-full mt-4">
+<div class="flex justify-between text-xs mb-2">
+<span class="text-gray-400">Progress</span>
+<span class="text-white font-bold">1/15</span>
+</div>
+<div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[6%]"></div>
+</div>
+</div>
+</div>
+<button class="w-full py-3 rounded-lg bg-primary hover:bg-primary/90 text-background-dark font-bold transition-colors flex items-center justify-center gap-2">
+<span>Copy Referral Link</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<aside class="hidden lg:flex flex-col w-[350px] fixed top-0 right-0 h-full border-l border-white/5 bg-[#102122]/90 backdrop-blur-2xl z-20 shadow-[0_0_50px_-20px_rgba(13,223,242,0.4)]">
+<div class="p-6 border-b border-white/5">
+<h2 class="text-xl font-bold text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-neon-violet">leaderboard</span>
+            Global Leaderboard
+        </h2>
+<p class="text-gray-400 text-xs mt-1">Top influencers this month</p>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-3">
+<div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-neon-violet/30 hover:bg-white/10 transition-colors group">
+<div class="w-8 text-center font-bold text-lg text-[#FFD700]">1</div>
+<div class="relative w-10 h-10 rounded-full overflow-hidden border border-white/20">
+<img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbIsx0_Phb32Tv_WB0kbOXmRsvcNnBSapyobI0yMLLYoZjia5PKR69eKPc_ix2gotUQ3LshY6logRYcdpA0uJagMZUZNJw4azzjhQmlpzSACfCAxHmWxp_HJ2Ry7ZwLYwkDdRi-lveJtssbCSpusstMh6I1f2GufnbAUZiasNttCGgroyI7UNMNzno7C_nCaQJz10XsDlH8ux_1LLS74VWECN0nt34T5mpIS8WbrsoxzZ1r6e0b_yLDHsV8_rg8FR0A1kDVELrZsQ"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-white text-sm font-medium truncate">Sarah V.</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">diamond</span>
+<span class="text-[10px] text-gray-400 uppercase tracking-wide">Diamond</span>
+</div>
+</div>
+<div class="bg-neon-violet/20 text-neon-violet px-2 py-1 rounded-md text-xs font-bold border border-neon-violet/20">
+                8.4k
+            </div>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+<div class="w-8 text-center font-bold text-lg text-[#C0C0C0]">2</div>
+<div class="relative w-10 h-10 rounded-full overflow-hidden border border-white/20">
+<img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgm6FFnzXodxETTDPEPU41CDstOck03DtG1CQiNSIA-t2bF9VJbpGFVEVdKMUZdIpRJPMmDMXdKBLEgUO5bU5EUIsb5MEfvW8N5ZmetIHnQdODLAZp-F7kuFltSJSK8fPZY8sjyp0k5iVLs3ZnaPpx1HSZPM1edltWsCj8Bn-VLR3Aeqhryrzf3PANosSv1kL6FkS6woS7TJ7rxbMoBOUwftTILxQi4EdZ4TcLf9CmHsMasbN5PLD6Ic-48lIkTVgTPyjG3VIT5i4"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-white text-sm font-medium truncate">Marcus L.</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-[#FFD700]">workspace_premium</span>
+<span class="text-[10px] text-gray-400 uppercase tracking-wide">Gold</span>
+</div>
+</div>
+<div class="bg-neon-violet/20 text-neon-violet px-2 py-1 rounded-md text-xs font-bold border border-neon-violet/20">
+                6.2k
+            </div>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+<div class="w-8 text-center font-bold text-lg text-[#CD7F32]">3</div>
+<div class="relative w-10 h-10 rounded-full overflow-hidden border border-white/20">
+<img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAKvGG4rvq-f2OQtGJsRWzQUT2tjyFvfm71QRIzCeRfAQ9XuZVtbkfW8urh2-B_pOcG0kx2nYZ9NA6wRr9GyzHTTWGFqVj669hKGpOZXqDAShYsDfanAA6cW3_lzRvI1-Kctk5Be-Zux9NxljeQRxhsj_iu4ywZ_O1HwYYzi-jefBIvfUhNAMq4mEldATUgySKyb2q2T69abXetWphMxnZChRdgorB9Tjz0xXnjNpvNnadZ_n7Buw8Cxe_sKQpkRYzreMCw40iA38"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-white text-sm font-medium truncate">Elara K.</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-[#C0C0C0]">verified</span>
+<span class="text-[10px] text-gray-400 uppercase tracking-wide">Silver</span>
+</div>
+</div>
+<div class="bg-neon-violet/20 text-neon-violet px-2 py-1 rounded-md text-xs font-bold border border-neon-violet/20">
+                5.9k
+            </div>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors">
+<div class="w-8 text-center font-bold text-sm text-gray-500">4</div>
+<div class="relative w-8 h-8 rounded-full overflow-hidden border border-white/10">
+<img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6sL0yADPzyrFyLpxDCR1i7TzQW2KJ20EOZBeqbZr2r2VYjdlOxdr59YACyyJOiYzKiUGkkKjxmg1aAX78gpOs0fQQ2kNmriYQLTIo98XSr0ZpAjmOKvNfffM_9lciqj1bc1MMMdTcIbHaoCWNIzGZ5QxbTJUJheEDimxRbyEWDKdkf8KdE6kBI0hVgXCSCC_Wwz2DUJhOZKsJMZqsCOMXJ5VTjIrRbZTuCaNz2MKL_6JUunj-zH1reRptE5kqx3hMU-KjLlywziY"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-gray-300 text-sm truncate">David Chen</div>
+</div>
+<div class="text-gray-400 text-xs font-medium">4.1k</div>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors">
+<div class="w-8 text-center font-bold text-sm text-gray-500">5</div>
+<div class="relative w-8 h-8 rounded-full overflow-hidden border border-white/10">
+<img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB262cN9DrFsp1bUMUDp7d5buFAm-kDIWbYXNM6VrbOKa_nvfPQ_1wLFRN8GflEsfIUB6-tdLyzjbtl05QJMgQLdeAjYY08xvb1uYwwpdk1iZtgBR5qX6H2TxFC3mgnUZ1trBlArC7shqhYeyTdCdo6_DdbWp4KP5lIDQcmNN0bDlKWlQy8VhJSo-hmNcxVukS8xpUeZ-9x7EAZw83FfVyuHh9DCQNUXY4G28aiEr0_kfWE9uSEPk-MMIMeBgo4f3w5gYFOwbrvXW0"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-gray-300 text-sm truncate">Tomo A.</div>
+</div>
+<div class="text-gray-400 text-xs font-medium">3.8k</div>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors">
+<div class="w-8 text-center font-bold text-sm text-gray-500">6</div>
+<div class="relative w-8 h-8 rounded-full overflow-hidden border border-white/10">
+<img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6YQtCrjGu8Qf54Bid8nR5bAW4V-8kwzkWphr9PyYk9xTdlwuWpJ_GSQuT9NhFVOJp5IAXDovxF4RcWZcwICHDmHwEmOWU7jaV-shcwqZZZcP-ilXawHNf9l3PdWusTCbsPtpTvanfqs9e2JbyB9luacu4VOUl0cEdf-KnStyPvDgsxbsx4Jhf6fzfBHGLPP-SAuU2oIfr0DWg0NHEaRxEnL3cv024mmKQMYSF2NInfKaK0kXNM7pLGWHUYDvXwoOeo0TTxdAX_No"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-gray-300 text-sm truncate">Jessica R.</div>
+</div>
+<div class="text-gray-400 text-xs font-medium">3.5k</div>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors">
+<div class="w-8 text-center font-bold text-sm text-gray-500">7</div>
+<div class="relative w-8 h-8 rounded-full overflow-hidden border border-white/10">
+<img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVcZ-EMtKhpJD0GoM6ya1HxXtnNMFnd5gP6utCTjKOqNe1vQNcMAyRS8x8rzGvD5QIC3qxTbf90ItSbvj-hH9YLkdcMwA_SHnM_FdzqDL4xeZUFwSRwczcne0QrzqfeQRPv9Tpx4Ude0EPX15avx5EORE49DTVcvdOclemaJZwCpLgddHaCdFniLB-cQe1u1qFk6ydO4lD_vj1XTbG9hel5D8JfwlCADfv-qifu07AeW4gxwz1hBWbx88KU3VKiHWQCNgZgMxPiTU"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-gray-300 text-sm truncate">Kai M.</div>
+</div>
+<div class="text-gray-400 text-xs font-medium">3.2k</div>
+</div>
+</div>
+<div class="p-4 border-t border-white/10 bg-gradient-to-t from-[#102122] to-[#102122]/90 backdrop-blur-xl relative">
+<div class="absolute -top-10 left-0 right-0 h-10 bg-gradient-to-t from-[#102122] to-transparent pointer-events-none"></div>
+<div class="flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-primary/10 to-transparent border border-primary/30 shadow-[0_0_15px_rgba(13,223,242,0.1)]">
+<div class="w-8 text-center font-bold text-sm text-primary">42</div>
+<div class="relative w-9 h-9 rounded-full overflow-hidden border border-primary/50">
+<div class="w-full h-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDryiefqOJ73GfUfUhedF9PZ91K0NMokIZUYtV5Ejo2Ur2QqoE31tvrJadp_XbucrmNoM07NKfhZN-0SlDCdjSjRmdyT04kSJK8MeG1LPcpj-rHBsFSXnBGeYj1m7N7wahldTpkh-VAFohF51DEc7MhS_QlHBHuvr_gg-tdhDTunOnFlsdrVsV74E5Ezi7TDJKHKX3gwnkzaYvZcsmNSDeyAVDUWy_80NYGwLJJdJnDn-LGG48-IhTHZks01raHV3koQQaJstIahIo");'></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-white text-sm font-bold truncate">You</div>
+<div class="text-[10px] text-gray-400">Top 15%</div>
+</div>
+<div class="bg-primary/20 text-primary px-2 py-1 rounded-md text-xs font-bold border border-primary/20">
+                2.4k
+            </div>
+</div>
+</div>
+</aside>
+<div class="absolute bottom-10 right-10 lg:right-[390px] z-50 transition-all duration-300">
+<button class="group relative flex items-center justify-center gap-3 bg-primary hover:bg-[#0bcce0] text-[#102122] rounded-full px-8 py-4 shadow-[0_0_30px_rgba(13,223,242,0.4)] hover:shadow-[0_0_50px_rgba(13,223,242,0.6)] transition-all duration-300 hover:-translate-y-1">
+<span class="material-symbols-outlined text-3xl group-hover:rotate-45 transition-transform duration-300">share</span>
+<span class="text-lg font-bold">Share Now</span>
+<span class="absolute top-0 right-0 -mt-2 -mr-2 flex h-5 w-5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+<span class="relative inline-flex rounded-full h-5 w-5 bg-white border-2 border-primary"></span>
+</span>
+</button>
+</div>
+<script>
+  document.querySelectorAll('button, a').forEach(el => {
+    if (el.innerText.toLowerCase().includes('back')) {
+      el.addEventListener('click', () => {
+        window.location.href = 'referral_rewards_dashboard.html';
+      });
+    }
+  });
+</script>
+<script>
+  document.addEventListener('click', () => {
+    window.location.href = 'referral_rewards_dashboard.html';
+  });
+</script>
+
+
+</body></html>

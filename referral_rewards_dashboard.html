@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aura Referral Rewards Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0dccf2",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#111718",
+                        "surface-dark": "#1b2527",
+                        "border-dark": "#283639",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                    boxShadow: {
+                        "neon": "0 0 10px rgba(13, 204, 242, 0.5), 0 0 20px rgba(13, 204, 242, 0.3)",
+                        "glass": "0 4px 30px rgba(0, 0, 0, 0.1)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(27, 37, 39, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .neon-text {
+            text-shadow: 0 0 10px rgba(13, 204, 242, 0.5);
+        }::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111718; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #283639; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b5054; 
+        }.rank-glow-1 {
+            box-shadow: 0 0 15px rgba(13, 204, 242, 0.4);
+            border-color: rgba(13, 204, 242, 0.6);
+        }
+        .rank-glow-2 {
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+            border-color: rgba(168, 85, 247, 0.6);
+        }
+        .rank-glow-3 {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+            border-color: rgba(59, 130, 246, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white overflow-x-hidden min-h-screen flex flex-col">
+<header class="sticky top-0 z-50 w-full glass-panel border-b border-white/5">
+    <div class="max-w-[1280px] mx-auto px-6 h-20 flex items-center justify-between">
+        
+        <a href="index.html" class="flex items-center gap-5 group no-underline shrink-0 transition-transform active:scale-95">
+            <div class="relative size-14 flex items-center justify-center">
+                <div class="absolute inset-0 border-2 border-white/10 rounded-full group-hover:border-primary/40 transition-all duration-700 group-hover:scale-110"></div>
+                <svg class="size-8 text-white group-hover:text-primary transition-all duration-700 ease-in-out transform group-hover:rotate-[360deg]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <circle cx="12" cy="12" r="10" stroke-width="1" />
+                    <path d="M12 6v6l3 2" stroke-width="1.5" stroke-linecap="round" />
+                    <path d="M12 3v1M12 20v1M3 12h1M20 12h1" stroke-width="1" />
+                </svg>
+                <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+            </div>
+            <div class="flex flex-col text-left">
+                <h2 class="text-3xl font-light tracking-[0.4em] text-white transition-all duration-500 group-hover:tracking-[0.5em] group-hover:text-primary leading-none">AURA</h2>
+                <span class="text-[9px] tracking-[0.7em] text-slate-500 uppercase font-medium group-hover:text-white transition-colors duration-700">Chronos Edition</span>
+            </div>
+        </a>
+
+        <div class="flex items-center gap-6">
+            <div class="flex items-center gap-6">
+    <button onclick="document.querySelector('input[readonly]').scrollIntoView({behavior: 'smooth'})" class="hidden sm:flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-xl hover:border-primary/50 transition-all group">
+        <span class="material-symbols-outlined text-primary text-[18px] group-hover:scale-110 transition-transform">loyalty</span>
+        <span class="text-xs font-bold text-white uppercase tracking-widest">3 Referrals</span>
+    </button>
+
+    <button onclick="window.location.href='order_tracking_page.html'" class="p-2 text-gray-400 hover:text-white transition-colors">
+        <span class="material-symbols-outlined">local_shipping</span>
+    </button>
+
+    
+</div>
+
+         <button onclick="window.location.href='referral_rewards_dashboard.html'" class="flex items-center gap-2 group relative active:scale-95 transition-transform">
+    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-blue-600 flex items-center justify-center text-xs font-bold shadow-lg group-hover:scale-110 transition-transform text-white border border-white/10">GS</div>
+    <span class="absolute -top-0.5 -right-0.5 flex h-3 w-3">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-primary border border-background-dark"></span>
+    </span>
+</button>
+        </div>
+    </div>
+</header>
+<main class="flex-grow w-full relative">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-primary/5 blur-[120px] pointer-events-none z-0"></div>
+<div class="layout-container flex flex-col items-center justify-start py-10 px-4 md:px-10 lg:px-40 relative z-10">
+<div class="w-full max-w-7xl grid grid-cols-1 xl:grid-cols-12 gap-8">
+<div class="xl:col-span-8 flex flex-col gap-10">
+<div class="w-full glass-panel rounded-2xl p-6 md:p-10 shadow-glass border-t border-white/10 relative overflow-hidden group">
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-700"></div>
+<div class="relative z-10 flex flex-col items-center text-center">
+<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4 border border-primary/20">
+<span class="material-symbols-outlined text-sm">stars</span> Referral Program
+                            </span>
+<h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight mb-3">Share the Aura</h1>
+<p class="text-gray-400 text-lg max-w-xl mb-8">Give your friends 10% off their first Aura watch. You unlock exclusive gear for every milestone.</p>
+<div class="w-full max-w-md mb-12">
+<div class="flex flex-col sm:flex-row gap-3">
+<div class="relative flex-grow group/input">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-primary group-focus-within/input:text-white transition-colors">link</span>
+</div>
+<input aria-label="Referral Code" class="w-full bg-[#111718] border border-border-dark text-white text-center sm:text-left text-xl font-mono font-bold py-4 pl-12 pr-4 rounded-xl focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner" readonly="" type="text" value="AURA-ALEX-99"/>
+<div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+<span class="text-xs text-gray-500 font-mono">CODE</span>
+</div>
+</div>
+<button class="bg-primary hover:bg-[#34e0ff] text-background-dark font-bold text-lg py-4 px-8 rounded-xl shadow-neon transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
+<span>Copy Link</span>
+<span class="material-symbols-outlined">content_copy</span>
+</button>
+</div>
+</div>
+<div class="w-full border-t border-border-dark pt-10">
+<div class="flex justify-between items-end mb-4 px-2">
+<h3 class="text-white font-bold text-lg">Rewards Progress</h3>
+<span class="text-primary font-mono text-sm">2 / 5 Referrals</span>
+</div>
+<div class="relative w-full h-16 flex items-center">
+<div class="absolute top-1/2 left-0 w-full h-2 bg-surface-dark rounded-full -translate-y-1/2 border border-border-dark"></div>
+<div class="absolute top-1/2 left-0 w-[60%] h-2 bg-primary rounded-full -translate-y-1/2 shadow-[0_0_12px_rgba(13,204,242,0.8)]"></div>
+<div class="absolute w-full flex justify-between px-[20%] sm:px-0 h-full items-center">
+<div class="absolute left-[20%] -translate-x-1/2 flex flex-col items-center group/marker cursor-pointer">
+<div class="size-10 rounded-full bg-background-dark border-2 border-primary text-primary flex items-center justify-center shadow-neon z-10 transition-transform group-hover/marker:scale-110">
+<span class="material-symbols-outlined text-[20px]">watch</span>
+</div>
+<div class="absolute top-12 w-32 text-center">
+<p class="text-white text-sm font-bold">Premium Band</p>
+<p class="text-primary text-xs">Unlocked</p>
+</div>
+</div>
+<div class="absolute left-[60%] -translate-x-1/2 flex flex-col items-center group/marker cursor-pointer">
+<div class="size-10 rounded-full bg-surface-dark border-2 border-border-dark text-gray-500 flex items-center justify-center z-10 transition-colors group-hover/marker:border-primary/50 group-hover/marker:text-primary/50">
+<span class="material-symbols-outlined text-[20px]">charging_station</span>
+</div>
+<div class="absolute top-12 w-32 text-center opacity-60 group-hover/marker:opacity-100 transition-opacity">
+<p class="text-gray-300 text-sm font-medium">Charging Stand</p>
+<p class="text-gray-500 text-xs">3 Referrals</p>
+</div>
+</div>
+<div class="absolute left-[100%] -translate-x-1/2 flex flex-col items-center group/marker cursor-pointer">
+<div class="size-10 rounded-full bg-surface-dark border-2 border-border-dark text-gray-500 flex items-center justify-center z-10 transition-colors group-hover/marker:border-primary/50 group-hover/marker:text-primary/50">
+<span class="material-symbols-outlined text-[20px]">percent</span>
+</div>
+<div class="absolute top-12 w-32 text-center opacity-60 group-hover/marker:opacity-100 transition-opacity">
+<p class="text-gray-300 text-sm font-medium">50% Off Aura 2</p>
+<p class="text-gray-500 text-xs">5 Referrals</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-6">
+<h2 class="text-2xl font-bold text-white px-2">How it Works</h2>
+<div class="grid gap-4">
+<div class="bg-surface-dark border border-border-dark p-5 rounded-xl flex items-start gap-4 hover:border-primary/30 transition-colors">
+<div class="p-3 bg-background-dark rounded-lg text-primary border border-border-dark">
+<span class="material-symbols-outlined text-[28px]">forward_to_inbox</span>
+</div>
+<div>
+<h3 class="text-white font-bold text-lg leading-tight mb-1">Invite Friends</h3>
+<p class="text-gray-400 text-sm leading-relaxed">Share your unique link via email, social media, or direct message.</p>
+</div>
+</div>
+<div class="bg-surface-dark border border-border-dark p-5 rounded-xl flex items-start gap-4 hover:border-primary/30 transition-colors">
+<div class="p-3 bg-background-dark rounded-lg text-primary border border-border-dark">
+<span class="material-symbols-outlined text-[28px]">group_add</span>
+</div>
+<div>
+<h3 class="text-white font-bold text-lg leading-tight mb-1">They Join</h3>
+<p class="text-gray-400 text-sm leading-relaxed">When they buy an Aura watch using your link, they get 10% off instantly.</p>
+</div>
+</div>
+<div class="bg-surface-dark border border-border-dark p-5 rounded-xl flex items-start gap-4 hover:border-primary/30 transition-colors">
+<div class="p-3 bg-background-dark rounded-lg text-primary border border-border-dark">
+<span class="material-symbols-outlined text-[28px]">redeem</span>
+</div>
+<div>
+<h3 class="text-white font-bold text-lg leading-tight mb-1">You Earn</h3>
+<p class="text-gray-400 text-sm leading-relaxed">Track your progress and automatically unlock premium accessories.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<div class="flex items-center justify-between px-2">
+<h2 class="text-2xl font-bold text-white">Referral History</h2>
+<button class="text-sm text-primary hover:underline">View All</button>
+</div>
+<div class="bg-surface-dark border border-border-dark rounded-xl overflow-hidden shadow-lg flex-1">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-[#151c1e] text-gray-400 text-xs uppercase tracking-wider font-semibold border-b border-border-dark">
+<tr>
+<th class="px-6 py-4">Friend</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-right">Reward</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-dark text-sm">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-medium text-white flex items-center gap-3">
+<div class="size-8 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-xs">JM</div>
+                                                    James
+                                                </td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-500/10 text-green-400 border border-green-500/20">
+<span class="size-1.5 rounded-full bg-green-400 animate-pulse"></span>
+                                                        Joined
+                                                    </span>
+</td>
+<td class="px-6 py-4 text-right text-primary font-bold">+1</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-medium text-white flex items-center gap-3">
+<div class="size-8 rounded-full bg-pink-500/20 text-pink-300 flex items-center justify-center font-bold text-xs">SK</div>
+                                                    Sarah
+                                                </td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-500/10 text-green-400 border border-green-500/20">
+<span class="size-1.5 rounded-full bg-green-400"></span>
+                                                        Joined
+                                                    </span>
+</td>
+<td class="px-6 py-4 text-right text-primary font-bold">+1</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-medium text-white flex items-center gap-3">
+<div class="size-8 rounded-full bg-orange-500/20 text-orange-300 flex items-center justify-center font-bold text-xs">DL</div>
+                                                    David
+                                                </td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+<span class="size-1.5 rounded-full bg-yellow-400"></span>
+                                                        Pending
+                                                    </span>
+</td>
+<td class="px-6 py-4 text-right text-gray-500 italic">...</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-medium text-white flex items-center gap-3">
+<div class="size-8 rounded-full bg-blue-500/20 text-blue-300 flex items-center justify-center font-bold text-xs">ER</div>
+                                                    Elena
+                                                </td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+<span class="size-1.5 rounded-full bg-yellow-400"></span>
+                                                        Pending
+                                                    </span>
+</td>
+<td class="px-6 py-4 text-right text-gray-500 italic">...</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-border-dark bg-[#151c1e] text-center">
+<p class="text-xs text-gray-500">Showing last 4 referrals</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="xl:col-span-4 flex flex-col gap-6">
+<h2 class="text-2xl font-bold text-white px-2">Top Referrers</h2>
+<div class="glass-panel rounded-2xl p-6 border border-border-dark flex flex-col gap-4 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+<div class="flex flex-col gap-3 z-10">
+<div class="flex items-center justify-between bg-[#151c1e]/80 p-3 rounded-xl border border-primary/40 rank-glow-1 transition-transform hover:scale-[1.02]">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="size-10 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-black font-bold text-sm shadow-neon">
+                                            #1
+                                        </div>
+<div class="absolute -bottom-1 -right-1 bg-black rounded-full p-0.5">
+<span class="material-symbols-outlined text-yellow-400 text-[14px]">emoji_events</span>
+</div>
+</div>
+<div>
+<p class="text-white font-bold text-sm">Elena Cyber</p>
+<p class="text-[10px] text-cyan-400 font-mono tracking-wider">ELITE MEMBER</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-primary font-bold text-lg">142</p>
+<p class="text-[10px] text-gray-400 uppercase">Referrals</p>
+</div>
+</div>
+<div class="flex items-center justify-between bg-[#151c1e]/60 p-3 rounded-xl border border-purple-500/40 rank-glow-2 transition-transform hover:scale-[1.02]">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="size-10 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white font-bold text-sm shadow-[0_0_10px_rgba(168,85,247,0.5)]">
+                                            #2
+                                        </div>
+</div>
+<div>
+<p class="text-white font-bold text-sm">Jaxon V.</p>
+<p class="text-[10px] text-purple-400 font-mono tracking-wider">PRO MEMBER</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-purple-400 font-bold text-lg">98</p>
+<p class="text-[10px] text-gray-400 uppercase">Referrals</p>
+</div>
+</div>
+<div class="flex items-center justify-between bg-[#151c1e]/60 p-3 rounded-xl border border-blue-500/40 rank-glow-3 transition-transform hover:scale-[1.02]">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="size-10 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold text-sm shadow-[0_0_10px_rgba(59,130,246,0.5)]">
+                                            #3
+                                        </div>
+</div>
+<div>
+<p class="text-white font-bold text-sm">Sarah Tech</p>
+<p class="text-[10px] text-blue-400 font-mono tracking-wider">MEMBER</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-blue-400 font-bold text-lg">85</p>
+<p class="text-[10px] text-gray-400 uppercase">Referrals</p>
+</div>
+</div>
+<div class="flex items-center justify-between bg-surface-dark/50 p-3 rounded-xl border border-border-dark hover:bg-surface-dark transition-colors">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-gray-700 flex items-center justify-center text-gray-300 font-bold text-xs border border-gray-600">
+                                        #4
+                                    </div>
+<div>
+<p class="text-gray-300 font-medium text-sm">Mike R.</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-white font-bold text-base">64</p>
+</div>
+</div>
+<div class="flex items-center justify-between bg-surface-dark/50 p-3 rounded-xl border border-border-dark hover:bg-surface-dark transition-colors">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-gray-700 flex items-center justify-center text-gray-300 font-bold text-xs border border-gray-600">
+                                        #5
+                                    </div>
+<div>
+<p class="text-gray-300 font-medium text-sm">Lisa K.</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-white font-bold text-base">51</p>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-white/10">
+<p class="text-xs text-gray-400 uppercase tracking-widest mb-3 text-center">Your Position</p>
+<div class="flex items-center justify-between bg-gradient-to-r from-surface-dark to-[#1f2b2d] p-3 rounded-xl border border-border-dark relative overflow-hidden">
+<div class="absolute left-0 top-0 h-full w-1 bg-primary"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="size-8 rounded-full bg-surface-dark border border-primary/30 flex items-center justify-center text-primary font-bold text-xs">
+                                        #42
+                                    </div>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-8 ring-1 ring-border-dark" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCNBeOUzpQfqk0LY2b2rmYJxUAixgfgciPK9Ogl7s4pu9XV-tEqH90rlptJjrE_jOC4tYV4Q8C6-4BDWDfjdRHNKKhBeBKofM0zvnyuFmHSXBHIO2WoWjhiAggkoa4YgvjVZDRDZbGJsLQMWECuhLw5w6xlDxXaM-2-69KmQivcdTcsu0mJ6AfaU2rKmPYamPHK0pzaEPOrJqYLJqFQjcWElmvJCXW7dqz21VA3zfBtT2zuyBL1WVg0oSbFglpkfZEi6FdY5eSzwHY");'></div>
+<div>
+<p class="text-white font-bold text-sm">You</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-white font-bold text-base">2</p>
+<p class="text-[9px] text-gray-400 uppercase">Referrals</p>
+</div>
+</div>
+<p class="text-[10px] text-gray-500 text-center mt-3">Refer 3 more friends to reach the top 30!</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+  document.addEventListener('click', e => {
+    const el = e.target.closest('button, a');
+    if (!el) return;
+
+    const text = el.innerText.toLowerCase();
+
+    // 1. Copy Referral Link Logic
+    if (text.includes('copy')) {
+        const input = document.querySelector('input');
+        const link = window.location.origin + '/index.html?ref=' + input.value;
+        navigator.clipboard.writeText(link).then(() => {
+            const originalHTML = el.innerHTML;
+            el.innerHTML = '<span>Copied!</span><span class="material-symbols-outlined text-sm">check</span>';
+            setTimeout(() => el.innerHTML = originalHTML, 2000);
+        });
+        return;
+    }
+
+    // 2. Track Order Navigation
+    if (el.innerHTML.includes('local_shipping') || text.includes('track')) {
+        window.location.href = 'order_tracking_page.html';
+    }
+
+    // 3. Rewards Navigation
+    if (text.includes('view all') || text.includes('available')) {
+        window.location.href = 'Available Rewards.html';
+    }
+  });
+
+  // 4. Load Personal Initials from memory
+  window.onload = () => {
+    const rawData = localStorage.getItem('customerShippingData');
+    if (rawData) {
+        const data = JSON.parse(rawData);
+        const initials = (data.firstName[0] + data.lastName[0]).toUpperCase();
+        // Update both the navbar circle and any JD text found
+        document.querySelectorAll('.rounded-full.bg-gradient-to-tr, .group div.font-bold').forEach(div => {
+            if(div.innerText.trim() === "JD") div.innerText = initials;
+        });
+    }
+  };
+</script>
+
+</body></html>

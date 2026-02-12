@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Help Center | AURA</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700" rel="stylesheet"/>
+    <script>
+        tailwind.config = { 
+            darkMode: "class", 
+            theme: { 
+                extend: { 
+                    colors: { "primary": "#0dccf2", "background-dark": "#101f22" }, 
+                    fontFamily: { "display": ["Space Grotesk", "sans-serif"] } 
+                } 
+            } 
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; } /* Makes the page slide smoothly when clicking buttons */
+        .glass-panel { background: rgba(16, 31, 34, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-white antialiased">
+
+    <header class="fixed top-0 w-full z-50 glass-panel border-b border-white/10">
+        <div class="max-w-[1400px] mx-auto px-8 h-24 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-5 group no-underline shrink-0">
+                <div class="relative size-14 flex items-center justify-center">
+                    <div class="absolute inset-0 border-2 border-white/10 rounded-full group-hover:border-primary/40 transition-all duration-700"></div>
+                    <svg class="size-8 text-white group-hover:text-primary transition-all duration-700 transform group-hover:rotate-[360deg]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10" stroke-width="1" />
+                        <path d="M12 6v6l3 2" stroke-width="1.5" stroke-linecap="round" />
+                        <path d="M12 3v1M12 20v1M3 12h1M20 12h1" stroke-width="1" />
+                    </svg>
+                </div>
+                <div class="flex flex-col text-left">
+                    <h2 class="text-3xl font-light tracking-[0.4em]">AURA</h2>
+                    <span class="text-[9px] tracking-[0.7em] text-slate-500 uppercase">Chronos Edition</span>
+                </div>
+            </a>
+            <a href="index.html" class="text-xs font-bold uppercase tracking-widest text-primary border border-primary/20 px-6 py-2 rounded-full hover:bg-primary hover:text-background-dark transition-all">Back to Home</a>
+        </div>
+    </header>
+
+    <main class="pt-48 pb-20 px-6 max-w-[1200px] mx-auto">
+        <div class="text-center mb-20">
+            <h1 class="text-6xl font-bold tracking-tighter mb-8 italic">HELP <span class="text-primary">CENTER</span></h1>
+            <div class="max-w-xl mx-auto relative">
+                <input type="text" placeholder="Search for pairing, battery, or specs..." class="w-full bg-white/5 border border-white/10 rounded-full px-8 py-4 text-white focus:border-primary outline-none transition-all">
+                <span class="material-symbols-outlined absolute right-6 top-1/2 -translate-y-1/2 text-slate-500">search</span>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-32">
+            <div class="glass-panel p-10 rounded-[32px] border border-white/10 hover:border-primary/30 transition-all group text-left">
+                <span class="material-symbols-outlined text-primary text-5xl mb-6">rocket_launch</span>
+                <h3 class="text-2xl font-bold mb-4">Getting Started</h3>
+                <p class="text-slate-400 font-body text-sm leading-relaxed mb-8">Learn how to pair your Aura and set up your first neural profile correctly.</p>
+                <a href="#getting-started" class="text-xs font-bold uppercase tracking-widest text-primary group-hover:underline">3 ARTICLES</a>
+            </div>
+
+            <div class="glass-panel p-10 rounded-[32px] border border-white/10 hover:border-primary/30 transition-all group text-left">
+                <span class="material-symbols-outlined text-primary text-5xl mb-6">settings</span>
+                <h3 class="text-2xl font-bold mb-4">Features & Customization</h3>
+                <p class="text-slate-400 font-body text-sm leading-relaxed mb-8">Master the LTPO display and advanced biometric tracking for your daily life.</p>
+                <a href="#features" class="text-xs font-bold uppercase tracking-widest text-primary group-hover:underline">3 ARTICLES</a>
+            </div>
+
+            <div class="glass-panel p-10 rounded-[32px] border border-white/10 hover:border-primary/30 transition-all group text-left">
+                <span class="material-symbols-outlined text-primary text-5xl mb-6">build</span>
+                <h3 class="text-2xl font-bold mb-4">Troubleshooting</h3>
+                <p class="text-slate-400 font-body text-sm leading-relaxed mb-8">Resolve connectivity issues and optimize graphene battery life for peak performance.</p>
+                <a href="#troubleshooting" class="text-xs font-bold uppercase tracking-widest text-primary group-hover:underline">3 ARTICLES</a>
+            </div>
+        </div>
+
+        <div class="space-y-20">
+            <section id="getting-started" class="glass-panel p-12 rounded-[40px] border border-white/10 scroll-mt-32">
+                <h2 class="text-3xl font-bold mb-6 text-primary italic">Getting Started Guides</h2>
+                <ul class="space-y-4 text-slate-400 font-body">
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Unboxing your AURA Chronos</li>
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Downloading the Neural-Link App</li>
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Bluetooth Pairing for iOS & Android</li>
+                </ul>
+            </section>
+
+            <section id="features" class="glass-panel p-12 rounded-[40px] border border-white/10 scroll-mt-32">
+                <h2 class="text-3xl font-bold mb-6 text-primary italic">Features & Customization</h2>
+                <ul class="space-y-4 text-slate-400 font-body">
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">star</span> Customizing your LTPO Watch Face</li>
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">star</span> Heart Rate & Blood Oxygen Calibration</li>
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">star</span> Setting up Sleep Tracking</li>
+                </ul>
+            </section>
+
+            <section id="troubleshooting" class="glass-panel p-12 rounded-[40px] border border-white/10 scroll-mt-32">
+                <h2 class="text-3xl font-bold mb-6 text-primary italic">Troubleshooting Support</h2>
+                <ul class="space-y-4 text-slate-400 font-body">
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">warning</span> Fix for Bluetooth Disconnections</li>
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">warning</span> Factory Resetting your device</li>
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">warning</span> Graphene Battery Optimization</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

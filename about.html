@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>About Us | AURA</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0dccf2",
+                        "background-dark": "#101f22",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(16, 31, 34, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .text-glow { text-shadow: 0 0 10px rgba(13, 204, 242, 0.4); }
+        .ambient-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(13,204,242,0.05) 0%, rgba(13,204,242,0) 70%);
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -20%);
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-white antialiased overflow-x-hidden">
+    <div class="relative min-h-screen flex flex-col">
+        <div class="ambient-glow"></div>
+
+        <header class="fixed top-0 w-full z-50 glass-panel border-b border-white/10">
+            <div class="max-w-[1400px] mx-auto px-8 h-20 flex items-center justify-between">
+               <a href="index.html" class="flex items-center gap-5 group no-underline shrink-0 transition-transform active:scale-95">
+    <div class="relative size-14 flex items-center justify-center">
+        <div class="absolute inset-0 border-2 border-white/10 rounded-full group-hover:border-primary/40 transition-all duration-700 group-hover:scale-110"></div>
+        <svg class="size-8 text-white group-hover:text-primary transition-all duration-700 ease-in-out transform group-hover:rotate-[360deg]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <circle cx="12" cy="12" r="10" stroke-width="1" />
+            <path d="M12 6v6l3 2" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M12 3v1M12 20v1M3 12h1M20 12h1" stroke-width="1" />
+        </svg>
+        <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+    </div>
+    <div class="flex flex-col">
+        <h2 class="text-3xl font-light tracking-[0.4em] text-white transition-all duration-500 group-hover:tracking-[0.5em] group-hover:text-primary">
+            AURA
+        </h2>
+        <span class="text-[9px] tracking-[0.7em] text-slate-500 uppercase font-medium group-hover:text-white transition-colors duration-700">Chronos Edition</span>
+    </div>
+</a>
+                <a href="index.html" class="text-xs uppercase tracking-widest font-bold text-primary hover:text-white transition-all">Back to Home</a>
+            </div>
+        </header>
+
+        <main class="flex-grow pt-40 pb-20 px-6">
+            <div class="max-w-[1000px] mx-auto">
+                <div class="flex flex-col gap-4 mb-20 text-center">
+                    <span class="text-primary text-xs font-bold uppercase tracking-[0.5em]">Our Mission</span>
+                    <h1 class="text-5xl md:text-7xl font-bold tracking-tighter leading-none">
+                        REDEFINING <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-slate-500">TIME.</span>
+                    </h1>
+                    <p class="text-slate-400 text-lg max-w-2xl mx-auto font-body mt-4">
+                        Aura was born from a simple belief: technology should feel like an extension of the self, not a distraction from it. We blend aerospace-grade materials with neural intelligence to create a wearable that understands you.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mt-20">
+                    <div class="glass-panel p-10 rounded-3xl">
+                        <span class="material-symbols-outlined text-primary text-4xl mb-4">diamond</span>
+                        <h3 class="text-2xl font-bold mb-3">Uncompromising Quality</h3>
+                        <p class="text-slate-400 font-body">Every watch is crafted from Grade 5 Titanium and Sapphire glass, ensuring a lifelong companion for your journey.</p>
+                    </div>
+                    <div class="glass-panel p-10 rounded-3xl">
+                        <span class="material-symbols-outlined text-primary text-4xl mb-4">psychology</span>
+                        <h3 class="text-2xl font-bold mb-3">Neural Innovation</h3>
+                        <p class="text-slate-400 font-body">Our proprietary OS learns your habits, optimizing your health and productivity in real-time.</p>
+                    </div>
+                </div>
+
+                <div class="mt-32 p-12 rounded-3xl bg-gradient-to-r from-primary/10 to-transparent border border-white/5 text-center">
+                    <h2 class="text-3xl font-bold mb-4">Ready to experience the future?</h2>
+                    <p class="text-slate-400 mb-8">Join thousands of early adopters worldwide.</p>
+                    <a href="index.html#styles" class="inline-block bg-primary text-background-dark font-black px-10 py-4 rounded-full uppercase tracking-widest text-sm hover:scale-105 transition-all">View Collection</a>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

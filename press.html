@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Press Kit | AURA</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700" rel="stylesheet"/>
+    <script>
+        tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#0dccf2", "background-dark": "#101f22" }, fontFamily: { "display": ["Space Grotesk", "sans-serif"] } } } }
+    </script>
+    <style>
+        .glass-panel { background: rgba(16, 31, 34, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .neon-glow:hover { box-shadow: 0 0 25px rgba(13, 204, 242, 0.4); }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-white antialiased">
+    <header class="fixed top-0 w-full z-50 glass-panel border-b border-white/10">
+        <div class="max-w-[1400px] mx-auto px-8 h-24 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-5 group no-underline shrink-0">
+                <div class="relative size-14 flex items-center justify-center">
+                    <div class="absolute inset-0 border-2 border-white/10 rounded-full group-hover:border-primary/40 transition-all duration-700"></div>
+                    <svg class="size-8 text-white group-hover:text-primary transition-all duration-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10" stroke-width="1" />
+                        <path d="M12 6v6l3 2" stroke-width="1.5" stroke-linecap="round" />
+                        <path d="M12 3v1M12 20v1M3 12h1M20 12h1" stroke-width="1" />
+                    </svg>
+                </div>
+                <div class="flex flex-col text-left">
+                    <h2 class="text-3xl font-light tracking-[0.4em]">AURA</h2>
+                    <span class="text-[9px] tracking-[0.7em] text-slate-500 uppercase">Chronos Edition</span>
+                </div>
+            </a>
+            <a href="index.html" class="text-xs font-bold uppercase tracking-widest text-primary border border-primary/20 px-6 py-2 rounded-full hover:bg-primary hover:text-background-dark transition-all">Exit</a>
+        </div>
+    </header>
+
+    <main class="pt-48 pb-20 px-6 max-w-[1100px] mx-auto text-center">
+        <h1 class="text-6xl font-bold tracking-tighter mb-20 italic">PRESS <span class="text-primary">RESOURCES</span></h1>
+        
+        <div class="grid md:grid-cols-2 gap-10">
+            <div class="glass-panel p-12 rounded-[40px] border border-white/10 flex flex-col items-center gap-8">
+                <span class="material-symbols-outlined text-primary text-7xl">folder_zip</span>
+                <div class="flex flex-col gap-2">
+                    <h3 class="text-3xl font-bold tracking-tight">Visual Assets</h3>
+                    <p class="text-slate-400 text-sm font-body leading-relaxed px-4">Download high-resolution product photography, logos, and brand guidelines for publication.</p>
+                </div>
+                <a href="Assets/Aura_Press_Kit.zip" download class="w-full bg-white/5 border border-white/10 py-5 rounded-2xl text-xs font-black uppercase tracking-[0.2em] hover:bg-primary hover:text-background-dark transition-all neon-glow no-underline">Download ZIP (45MB)</a>
+            </div>
+
+            <div class="glass-panel p-12 rounded-[40px] border border-white/10 flex flex-col items-center gap-8">
+                <span class="material-symbols-outlined text-primary text-7xl">contact_mail</span>
+                <div class="flex flex-col gap-2">
+                    <h3 class="text-3xl font-bold tracking-tight">Press Inquiries</h3>
+                    <p class="text-slate-400 text-sm font-body leading-relaxed px-4">For interview requests, review units, or exclusive features, please contact our PR team.</p>
+                </div>
+                <a href="mailto:shirzaighulamrasool@gmail.com?subject=Press Inquiry" class="w-full bg-primary text-background-dark py-5 rounded-2xl text-xs font-black uppercase tracking-[0.2em] transition-all neon-glow no-underline shadow-[0_0_20px_rgba(13,204,242,0.3)]">Contact PR Team</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

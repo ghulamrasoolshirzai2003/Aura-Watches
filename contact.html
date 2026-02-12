@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Contact | AURA</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700" rel="stylesheet"/>
+    <script>
+        tailwind.config = { 
+            darkMode: "class", 
+            theme: { 
+                extend: { 
+                    colors: { "primary": "#0dccf2", "background-dark": "#101f22" }, 
+                    fontFamily: { "display": ["Space Grotesk", "sans-serif"] } 
+                } 
+            } 
+        }
+    </script>
+    <style>
+        .glass-panel { background: rgba(16, 31, 34, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .neon-glow:hover { box-shadow: 0 0 20px rgba(13, 204, 242, 0.3); }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-white antialiased overflow-x-hidden">
+
+    <header class="fixed top-0 w-full z-50 glass-panel border-b border-white/10">
+        <div class="max-w-[1400px] mx-auto px-8 h-24 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-5 group no-underline shrink-0">
+                <div class="relative size-14 flex items-center justify-center">
+                    <div class="absolute inset-0 border-2 border-white/10 rounded-full group-hover:border-primary/40 transition-all duration-700"></div>
+                    <svg class="size-8 text-white group-hover:text-primary transition-all duration-700 transform group-hover:rotate-[360deg]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10" stroke-width="1" />
+                        <path d="M12 6v6l3 2" stroke-width="1.5" stroke-linecap="round" />
+                        <path d="M12 3v1M12 20v1M3 12h1M20 12h1" stroke-width="1" />
+                    </svg>
+                </div>
+                <div class="flex flex-col text-left">
+                    <h2 class="text-3xl font-light tracking-[0.4em]">AURA</h2>
+                    <span class="text-[9px] tracking-[0.7em] text-slate-500 uppercase">Chronos Edition</span>
+                </div>
+            </a>
+            <a href="index.html" class="text-xs font-bold uppercase tracking-widest text-primary border border-primary/20 px-6 py-2 rounded-full hover:bg-primary hover:text-background-dark transition-all">Exit</a>
+        </div>
+    </header>
+
+    <main class="pt-48 pb-20 px-6 max-w-[900px] mx-auto">
+        <div class="text-center mb-16">
+            <h1 class="text-5xl md:text-6xl font-bold tracking-tighter mb-4 italic">GET IN <span class="text-primary">TOUCH</span></h1>
+            <p class="text-slate-400 font-body">Have a question or need to file a warranty claim? We're here to help.</p>
+        </div>
+
+        <div class="glass-panel p-8 md:p-12 rounded-[40px] border border-white/10 shadow-2xl">
+            <form action="https://formspree.io/f/your_id_here" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex flex-col gap-2">
+                    <label class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Full Name</label>
+                    <input name="name" type="text" placeholder="John Doe" required class="bg-black/20 border border-white/10 text-white rounded-xl px-4 py-4 focus:border-primary outline-none transition-all">
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Email Address</label>
+                    <input name="email" type="email" placeholder="john@aura.com" required class="bg-black/20 border border-white/10 text-white rounded-xl px-4 py-4 focus:border-primary outline-none transition-all">
+                </div>
+                <div class="flex flex-col gap-2 md:col-span-2">
+                    <label class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Reason for Contact</label>
+                    <select name="subject" class="bg-black/20 border border-white/10 text-white rounded-xl px-4 py-4 focus:border-primary outline-none transition-all appearance-none">
+                        <option value="General Inquiry" class="bg-background-dark">General Inquiry</option>
+                        <option value="Warranty Claim" class="bg-background-dark" selected>Warranty Claim</option>
+                        <option value="Order Status" class="bg-background-dark">Order Status</option>
+                        <option value="Technical Support" class="bg-background-dark">Technical Support</option>
+                    </select>
+                </div>
+                <div class="flex flex-col gap-2 md:col-span-2">
+                    <label class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Message</label>
+                    <textarea name="message" rows="5" placeholder="Tell us how we can help..." required class="bg-black/20 border border-white/10 text-white rounded-xl px-4 py-4 focus:border-primary outline-none transition-all resize-none"></textarea>
+                </div>
+                <button type="submit" class="md:col-span-2 bg-primary hover:bg-cyan-400 text-background-dark font-black py-5 rounded-xl transition-all uppercase tracking-widest text-sm neon-glow">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

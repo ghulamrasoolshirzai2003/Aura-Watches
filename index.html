@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aura Smartwatch</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0dccf2",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#101f22",
+                        "glass-border": "rgba(255, 255, 255, 0.08)",
+                        "glass-bg": "rgba(255, 255, 255, 0.03)",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                },
+            },
+        }
+    </script>
+<style>.glass-panel {
+            background: rgba(16, 31, 34, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .neon-glow {
+            box-shadow: 0 0 15px rgba(13, 204, 242, 0.3);
+            transition: all 0.3s ease;
+        }
+        .neon-glow:hover {
+            box-shadow: 0 0 25px rgba(13, 204, 242, 0.5);
+            transform: translateY(-1px);
+        }
+        .text-glow {
+            text-shadow: 0 0 10px rgba(13, 204, 242, 0.4);
+        }.ambient-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(13,204,242,0.08) 0%, rgba(13,204,242,0) 70%);
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -20%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        html {
+    /* This makes the "rem" units smaller across the whole site */
+    font-size: 86%; 
+}
+
+body {
+    /* Optional: If the site feels shifted, this ensures it stays centered */
+    width: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+/* Adjusting the max-width of your main containers to match the new scale */
+.max-w-\[1200px\] {
+    max-w: 1100px;
+}
+
+.max-w-\[1400px\] {
+    max-w: 1280px;
+}
+@keyframes shimmer {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+.active-card {
+    border-color: rgba(13, 204, 242, 0.4) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 0 0 30px rgba(13, 204, 242, 0.15) !important;
+}
+/* Enable scrolling for the 20 colors */
+#color-palette {
+    display: flex !important;
+    gap: 12px;
+    overflow-x: auto !important;
+    padding: 10px 20px; /* Increased padding so last items aren't cut off */
+    width: 100%;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+/* Pulls the sections together with a perfect gap */
+#styles {
+    padding-bottom: 20px !important; /* Adds a small buffer at the bottom */
+}
+
+#accessories {
+    padding-top: 20px !important; /* Adds a small buffer at the top */
+    margin-top: 0 !important;
+}
+
+/* Removes the negative nudge so it stops touching */
+#accessories .max-w-\[1200px\] {
+    margin-top: 0 !important; 
+}
+/* Makes the accessory containers more compact and responsive */
+#accessories .grid {
+    max-width: 1000px !important; /* Limits the total width of the 3-column row */
+    margin: 0 auto;
+    gap: 20px !important; /* Tightens the space between cards */
+}
+
+#accessories .glass-panel {
+    max-width: 320px !important; /* Prevents individual cards from becoming too wide */
+    margin: 0 auto;
+    padding: 20px !important; /* Reduces internal spacing for a tighter look */
+}
+
+/* Adjusts the image size inside the cards */
+#accessories .aspect-\[4\/3\] {
+    max-height: 200px !important; 
+}
+/* Compacts the Watch Showcase Section */
+#styles .max-w-\[1200px\] {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+#aura-showcase {
+    padding: 30px !important; /* Reduces internal padding from 48px to 30px */
+    gap: 30px !important;     /* Tightens gap between image and text */
+    min-height: auto !important;
+}
+
+/* Reduces Watch Image Size */
+#aura-showcase .max-w-\[400px\] {
+    max-width: 280px !important;
+}
+
+
+/* Tightens Spec Grid */
+#aura-showcase .grid-cols-2 {
+    gap: 10px !important;
+}
+
+#aura-showcase .grid-cols-2 div {
+    padding: 10px !important;
+}
+/* Zooms out the accessory photos to show the full product */
+#accessories img {
+    object-fit: contain !important; /* Shows the whole image without cropping */
+    padding: 15px;                  /* Adds space around the image so it doesn't touch the borders */
+    transition: transform 0.5s ease;
+}
+
+/* Adds a nice subtle hover effect since we have space now */
+#accessories .group:hover img {
+    transform: scale(1.08); /* Slightly zooms in when you hover the card */
+}
+#main-watch-img {
+    max-width: 260px !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    display: block;
+}
+
+
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white antialiased overflow-x-hidden selection:bg-primary/30">
+<div class="relative min-h-screen flex flex-col">
+<div class="ambient-glow"></div>
+<header id="top" class="fixed top-0 w-full z-50 glass-panel border-b border-white/10 backdrop-blur-2xl">
+    <div class="max-w-[1400px] mx-auto px-8 h-24 flex items-center justify-between">
+        
+        <a href="javascript:void(0)" id="home-logo" class="flex items-center gap-5 group no-underline shrink-0 transition-transform active:scale-95">
+            <div class="relative size-14 flex items-center justify-center">
+                <div class="absolute inset-0 border-2 border-white/10 rounded-full group-hover:border-primary/40 transition-all duration-700 group-hover:scale-110"></div>
+                <svg class="size-8 text-white group-hover:text-primary transition-all duration-700 ease-in-out transform group-hover:rotate-[360deg]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <circle cx="12" cy="12" r="10" stroke-width="1" />
+                    <path d="M12 6v6l3 2" stroke-width="1.5" stroke-linecap="round" />
+                    <path d="M12 3v1M12 20v1M3 12h1M20 12h1" stroke-width="1" />
+                </svg>
+                <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+            </div>
+            <div class="flex flex-col">
+                <h2 class="text-3xl font-light tracking-[0.4em] text-white transition-all duration-500 group-hover:tracking-[0.5em] group-hover:text-primary">
+                    AURA
+                </h2>
+                <span class="text-[9px] tracking-[0.7em] text-slate-500 uppercase font-medium group-hover:text-white transition-colors duration-700">Chronos Edition</span>
+            </div>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-16">
+            <a class="text-[13px] uppercase tracking-[0.25em] font-semibold text-slate-300 hover:text-primary transition-all duration-300 relative group/link" href="#features">Features</a>
+            <a class="text-[13px] uppercase tracking-[0.25em] font-semibold text-slate-300 hover:text-primary transition-all duration-300 relative group/link" href="#tech">Tech</a>
+            <a class="text-[13px] uppercase tracking-[0.25em] font-semibold text-slate-300 hover:text-primary transition-all duration-300 relative group/link" href="#styles">Styles</a>
+        </nav>
+
+        <button id="main-preorder-btn" class="relative overflow-hidden bg-primary px-10 py-4 border border-primary transition-all duration-500 hover:bg-transparent hover:text-primary group shrink-0">
+            <span class="relative z-10 text-[12px] uppercase tracking-[0.25em] font-black">Pre-order</span>
+            <div class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+        </button>
+    </div>
+</header>
+<main class="flex-grow">
+<section class="pt-32 pb-16 px-6 relative overflow-hidden min-h-[70vh] flex items-center" id="features">
+   <div class="max-w-[1200px] mx-auto grid lg:grid-cols-2 gap-10 items-center w-full">
+        
+        <div class="flex flex-col gap-4 order-2 lg:order-1 relative z-10 lg:pr-12">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 w-fit">
+                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                <span class="text-xs font-medium text-primary tracking-wide uppercase">New Release 2026</span>
+            </div>
+            <h1 class="text-6xl lg:text-8xl font-bold leading-[1.05] tracking-tight text-white flex flex-col">
+    <span class="text-sm lg:text-base font-medium tracking-[0.6em] text-primary/80 uppercase mb-4 block">
+        Next-Gen Horizon
+    </span>
+    <span class="relative">
+        FUTURE ON
+    </span>
+    <span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-200 via-white to-slate-500 bg-[length:200%_auto] animate-[shimmer_5s_linear_infinite] drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+        YOUR WRIST
+    </span>
+</h1>
+            <p class="text-lg text-slate-400 max-w-md font-body leading-relaxed">
+                Experience the next generation of biometrics and connectivity. The Aura One redefines what a wearable can be.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                <button class="bg-primary hover:bg-cyan-400 text-background-dark h-14 px-8 rounded-full font-bold text-lg neon-glow flex items-center justify-center gap-2 transition-all">
+                    <span>Order Now</span>
+                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                </button>
+                <button id="watch-video-btn" type="button" class="h-14 px-8 rounded-full font-bold text-white border border-slate-700 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all flex items-center justify-center">
+                    Watch Video
+                </button>
+            </div>
+            <div class="flex items-center gap-4 pt-8 text-slate-500 text-sm font-body">
+                <div class="flex -space-x-2">
+                    <div class="w-8 h-8 rounded-full border-2 border-background-dark bg-slate-700 bg-center bg-cover" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuChI19HyJAqxpO8lFdzo2KbSzBezR3rurrPSuwlbPFC27OC3IM9UMePOZ9YqcD00o6Cqi5aDRdQ6Cr3JbXDkSy-daQm5LooFh39au8lG82FRrmePKFNoyp9oEt_ws4wSl7f_2TGNMa6tUukt6-662u1oLL5ek_P1se_wddvyMlZREYPkEIBu98568rHpsT2jp8ZBX-cQSyxqWMfQCe7iVRrQBxb5uesWNAlSVuJyecjvySyPpKzSIrlp7c6HkpndBLmCoF9tphsZWg')"></div>
+                    <div class="w-8 h-8 rounded-full border-2 border-background-dark bg-slate-700 bg-center bg-cover" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDIh5eN2Yp_fOQ7a8It6TlL0ixkqnblF2Um2_uRWCwoQRH_AErralEeNV8DVreR6zi0giBs_3S_Zg2cImVMUIw0B0yKWku6KIDOGfAyJogzIV3pViyqN6JQzeuqYQ2sLoT3q46G9sH9vXjbNdHtygeezbw2G-34wpbQajZyDoccndIashmsmcdcngJoL11pPuChBrYWBg3JneC3RLe1RLsJQ0EgF5VgA7DIeXB_DN-lURKCp4X2fD26xlbKLGOKmW4eBxA-g_gQc_4')"></div>
+                    <div class="w-8 h-8 rounded-full border-2 border-background-dark bg-slate-700 bg-center bg-cover" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB0sl3K5Rzg3Y45vV39WtURBQWGjRktKjT1AtENeb_NI8vS9rp5Eb6JGhvT2Xx5j0-qOvjVckhtHjAys_u9aMKbpZNDnZ3eSKrgdtk9e4sU9fLhD6-aPLiC1fIG3zehhuYMImvYJo5RlbTcm3HdaijGssP15rBp5_6OckaDreg2eyF1SE6DRIn47r_VyDwWVtEBdpjaI3VJzB3yrt5Bcwqir5gsrj-D8M17viWVcCZWEyrXfO_8vAD2DHAB_Xe_33yamEUL6LeqIHo')"></div>
+                </div>
+                <p>Trusted by 10,000+ early adopters</p>
+            </div>
+        </div>
+
+        <div class="order-1 lg:order-2 relative flex justify-center lg:justify-end">
+            <div class="absolute inset-0 bg-primary/20 blur-[100px] rounded-full transform scale-75 opacity-40"></div>
+            
+            <div class="relative w-full aspect-video max-w-[650px] rounded-2xl overflow-hidden border border-white/5 shadow-2xl transition-transform hover:scale-105 duration-700 ease-out">
+                <video autoplay muted loop playsinline class="w-full h-full object-cover">
+                    <source src="Photos/aura2.mp4" type="video/mp4">
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-background-dark/40 via-transparent to-transparent"></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section class="pt-4 pb-24 px-6 relative overflow-hidden" id="features">
+    <div class="absolute top-0 left-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-[1200px] mx-auto px-8 flex flex-col gap-12 relative z-10">
+    <div class="flex flex-col gap-1 max-w-2xl text-left">
+        <div class="flex items-center gap-3 text-primary">
+            <span class="h-px w-6 bg-primary"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.4em]">Core Intelligence</span>
+        </div>
+        
+        <h2 class="text-4xl md:text-5xl font-bold text-white tracking-tighter leading-[1.1]">
+            ADVANCED <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-slate-500">TECHNOLOGY</span>
+        </h2>
+        
+        <p class="text-slate-400 text-lg font-body leading-relaxed mt-3">
+            Designed for the future of health and connectivity, powered by our proprietary neural engine.
+        </p>
+    </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="group relative">
+                <div class="absolute -inset-px bg-gradient-to-b from-primary/30 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="relative glass-panel p-10 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] transition-all duration-500 h-full flex flex-col overflow-hidden">
+                    <div class="size-14 rounded-xl bg-gradient-to-br from-primary/20 to-transparent border border-primary/20 flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-all duration-500">
+                        <span class="material-symbols-outlined text-[32px]">ecg_heart</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4 tracking-tight">Neural Vitals</h3>
+                    <p class="text-slate-400 font-body leading-relaxed mb-6">
+                        Real-time biometrics monitoring powered by on-device neural networks that predict health trends before they emerge.
+                    </p>
+                    
+                    <div id="details-health" style="max-height: 0px; opacity: 0; overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
+                        <ul class="text-sm text-slate-300 space-y-3 border-t border-white/10 pt-6 mt-2">
+                            <li class="flex items-center gap-3"><span class="size-1.5 bg-primary rounded-full shadow-[0_0_5px_#0dccf2]"></span> 24/7 Arrhythmia Detection</li>
+                            <li class="flex items-center gap-3"><span class="size-1.5 bg-primary rounded-full shadow-[0_0_5px_#0dccf2]"></span> Blood Oxygen (SpO2) Trends</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="toggleFeature('details-health', this)" class="mt-auto pt-8 flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-widest outline-none group/btn">
+                        <span class="label">Learn More</span> 
+                        <span class="material-symbols-outlined text-sm transition-transform duration-500">expand_more</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="group relative">
+                <div class="absolute -inset-px bg-gradient-to-b from-primary/30 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="relative glass-panel p-10 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] transition-all duration-500 h-full flex flex-col overflow-hidden">
+                    <div class="size-14 rounded-xl bg-gradient-to-br from-primary/20 to-transparent border border-primary/20 flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-all duration-500">
+                        <span class="material-symbols-outlined text-[32px]">bolt</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4 tracking-tight">Graphene Cell</h3>
+                    <p class="text-slate-400 font-body leading-relaxed mb-6">
+                        Breakthrough graphene energy storage delivers 7 full days of peak performance on a single 45-minute rapid charge.
+                    </p>
+
+                    <div id="details-battery" style="max-height: 0px; opacity: 0; overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
+                        <ul class="text-sm text-slate-300 space-y-3 border-t border-white/10 pt-6 mt-2">
+                            <li class="flex items-center gap-3"><span class="size-1.5 bg-primary rounded-full shadow-[0_0_5px_#0dccf2]"></span> 590mAh High-Density Core</li>
+                            <li class="flex items-center gap-3"><span class="size-1.5 bg-primary rounded-full shadow-[0_0_5px_#0dccf2]"></span> Magnetic Qi Wireless Charging</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="toggleFeature('details-battery', this)" class="mt-auto pt-8 flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-widest outline-none group/btn">
+                        <span class="label">Learn More</span> 
+                        <span class="material-symbols-outlined text-sm transition-transform duration-500">expand_more</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="group relative">
+                <div class="absolute -inset-px bg-gradient-to-b from-primary/30 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="relative glass-panel p-10 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] transition-all duration-500 h-full flex flex-col overflow-hidden">
+                    <div class="size-14 rounded-xl bg-gradient-to-br from-primary/20 to-transparent border border-primary/20 flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-all duration-500">
+                        <span class="material-symbols-outlined text-[32px]">visibility</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4 tracking-tight">Retina Flow</h3>
+                    <p class="text-slate-400 font-body leading-relaxed mb-6">
+                        An edge-to-edge LTPO OLED display featuring infinite contrast, 2000 nits peak brightness, and 120Hz fluid motion.
+                    </p>
+
+                    <div id="details-display" style="max-height: 0px; opacity: 0; overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
+                        <ul class="text-sm text-slate-300 space-y-3 border-t border-white/10 pt-6 mt-2">
+                            <li class="flex items-center gap-3"><span class="size-1.5 bg-primary rounded-full shadow-[0_0_5px_#0dccf2]"></span> Always-On Sapphire Glass</li>
+                            <li class="flex items-center gap-3"><span class="size-1.5 bg-primary rounded-full shadow-[0_0_5px_#0dccf2]"></span> 450x450 High PPI Resolution</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="toggleFeature('details-display', this)" class="mt-auto pt-8 flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-widest outline-none group/btn">
+                        <span class="label">Learn More</span> 
+                        <span class="material-symbols-outlined text-sm transition-transform duration-500">expand_more</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="pt-4 pb-6 px-6 relative" id="tech">
+    <div class="max-w-[1200px] mx-auto px-8">
+    <div class="flex flex-col gap-1 max-w-2xl mb-12 text-left">
+        <div class="flex items-center gap-3 text-primary">
+            <span class="h-px w-6 bg-primary"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.4em]">Hardware Manifest</span>
+        </div>
+        
+        <h2 class="text-4xl md:text-5xl font-bold text-white tracking-tighter leading-[1.1]">
+            TECHNICAL <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-slate-500">SPECIFICATIONS</span>
+        </h2>
+        
+        <p class="text-slate-400 text-lg font-body leading-relaxed mt-3">
+            Precision engineering meets cutting-edge hardware, designed for the next era of wearable tech.
+        </p>
+    </div>
+
+       <div class="glass-panel rounded-3xl overflow-hidden border border-white/10 shadow-2xl backdrop-blur-md">
+    <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-white/5">
+        
+        <div class="group/item p-8 hover:bg-primary/[0.03] transition-colors border-b border-white/5">
+            <div class="flex items-center gap-4 mb-3">
+                <span class="material-symbols-outlined text-primary text-3xl">smartphone</span>
+                <span class="text-sm font-bold text-white uppercase tracking-widest">Display</span>
+            </div>
+            <div class="text-white text-lg font-semibold">1.4" LTPO OLED</div>
+            <p class="text-slate-400 text-sm leading-relaxed">450x450 pixels, 326 PPI, Always-On, 1000 nits, Sapphire Glass.</p>
+        </div>
+
+        <div class="group/item p-8 hover:bg-primary/[0.03] transition-colors border-b border-white/5">
+            <div class="flex items-center gap-4 mb-3">
+                <span class="material-symbols-outlined text-primary text-3xl">bolt</span>
+                <span class="text-sm font-bold text-white uppercase tracking-widest">Power</span>
+            </div>
+            <div class="text-white text-lg font-semibold">7 Days Typical Use</div>
+            <p class="text-slate-400 text-sm leading-relaxed">590mAh Li-Po. Fast charge: 0-80% in 45m. Wireless magnetic dock.</p>
+        </div>
+
+        <div class="group/item p-8 hover:bg-primary/[0.03] transition-colors border-b border-white/5 md:border-b-0">
+            <div class="flex items-center gap-4 mb-3">
+                <span class="material-symbols-outlined text-primary text-3xl">sensors</span>
+                <span class="text-sm font-bold text-white uppercase tracking-widest">Biometrics</span>
+            </div>
+            <div class="text-white text-lg font-semibold">BioTracker™ PPG</div>
+            <p class="text-slate-400 text-sm leading-relaxed">SpO2, Heart Rate, ECG, Temp, Accelerometer, Gyroscope.</p>
+        </div>
+
+        <div class="group/item p-8 hover:bg-primary/[0.03] transition-colors">
+            <div class="flex items-center gap-4 mb-3">
+                <span class="material-symbols-outlined text-primary text-3xl">shield</span>
+                <span class="text-sm font-bold text-white uppercase tracking-widest">Build</span>
+            </div>
+            <div class="text-white text-lg font-semibold">5ATM & IP68</div>
+            <p class="text-slate-400 text-sm leading-relaxed">Titanium frame, Water resistant to 50m. BT 5.3 & Wi-Fi 6.</p>
+        </div>
+
+    </div>
+</div>
+    </div>
+</section>
+<section class="pt-8 pb-0 px-6 relative overflow-hidden" id="testimonials">
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="max-w-[1200px] mx-auto relative z-10">
+<div class="flex flex-col gap-1 max-w-2xl mb-12 text-left px-8">
+    <div class="flex items-center gap-3 text-primary">
+        <span class="h-px w-6 bg-primary"></span>
+        <span class="text-[10px] font-bold uppercase tracking-[0.4em]">User Experience</span>
+    </div>
+    <h2 class="text-4xl md:text-5xl font-bold text-white tracking-tighter leading-[1.1]">
+        COMMUNITY <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-slate-500">FEEDBACK</span>
+    </h2>
+    <p class="text-slate-400 text-lg font-body leading-relaxed mt-3">
+        See what the future feels like for our early adopters and global community.
+    </p>
+</div>
+
+<div class="relative px-4 md:px-16">
+    <button onclick="moveSlider(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full border border-primary/20 bg-background-dark/90 text-primary hover:bg-primary hover:text-background-dark transition-all flex items-center justify-center neon-glow">
+        <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    
+    <button onclick="moveSlider(1)" class="absolute right-2 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full border border-primary/20 bg-background-dark/90 text-primary hover:bg-primary hover:text-background-dark transition-all flex items-center justify-center neon-glow">
+        <span class="material-symbols-outlined">arrow_forward</span>
+    </button>
+
+    <div class="overflow-hidden">
+        <div id="testimonial-slider" class="flex transition-transform duration-500 ease-out gap-6">
+            
+            <div class="min-w-full md:min-w-[calc(33.333%-16px)] glass-panel p-8 rounded-2xl flex flex-col gap-6">
+                <div class="flex items-center gap-4">
+                    <img src="https://i.pravatar.cc/150?u=11" class="w-12 h-12 rounded-full border border-primary/30" alt="User">
+                    <div><h4 class="text-white font-bold">Alex M.</h4><span class="text-slate-500 text-xs uppercase">Pro Athlete</span></div>
+                </div>
+                <div class="flex text-primary text-glow"><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span></div>
+                <p class="text-slate-300">"The health tracking is unmatched. It's like having a lab on my wrist."</p>
+            </div>
+
+            <div class="min-w-full md:min-w-[calc(33.333%-16px)] glass-panel p-8 rounded-2xl flex flex-col gap-6 border-primary/40 bg-white/5">
+                <div class="flex items-center gap-4">
+                    <img src="https://i.pravatar.cc/150?u=22" class="w-12 h-12 rounded-full border border-primary/30" alt="User">
+                    <div><h4 class="text-white font-bold">Sarah K.</h4><span class="text-slate-500 text-xs uppercase">Tech Reviewer</span></div>
+                </div>
+                <div class="flex text-primary text-glow"><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span></div>
+                <p class="text-white">"Stunning display and battery life that actually lasts. Purely futuristic."</p>
+            </div>
+
+            <div class="min-w-full md:min-w-[calc(33.333%-16px)] glass-panel p-8 rounded-2xl flex flex-col gap-6">
+                <div class="flex items-center gap-4">
+                    <img src="https://i.pravatar.cc/150?u=33" class="w-12 h-12 rounded-full border border-primary/30" alt="User">
+                    <div><h4 class="text-white font-bold">David R.</h4><span class="text-slate-500 text-xs uppercase">Developer</span></div>
+                </div>
+                <div class="flex text-primary text-glow"><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span></div>
+                <p class="text-slate-300">"The seamless connectivity with my smart home is a game changer. Worth it."</p>
+            </div>
+
+            <div class="min-w-full md:min-w-[calc(33.333%-16px)] glass-panel p-8 rounded-2xl flex flex-col gap-6">
+                <div class="flex items-center gap-4">
+                    <img src="https://i.pravatar.cc/150?u=44" class="w-12 h-12 rounded-full border border-primary/30" alt="User">
+                    <div><h4 class="text-white font-bold">Marcus T.</h4><span class="text-slate-500 text-xs uppercase">Designer</span></div>
+                </div>
+                <div class="flex text-primary text-glow"><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span></div>
+                <p class="text-slate-300">"I've worn many smartwatches, but this titanium build is on another level."</p>
+            </div>
+
+            <div class="min-w-full md:min-w-[calc(33.333%-16px)] glass-panel p-8 rounded-2xl flex flex-col gap-6">
+                <div class="flex items-center gap-4">
+                    <img src="https://i.pravatar.cc/150?u=55" class="w-12 h-12 rounded-full border border-primary/30" alt="User">
+                    <div><h4 class="text-white font-bold">Elena V.</h4><span class="text-slate-500 text-xs uppercase">Yoga Coach</span></div>
+                </div>
+                <div class="flex text-primary text-glow"><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span></div>
+                <p class="text-slate-300">"The Graphene battery delivers. I charge it once a week and forget about it."</p>
+            </div>
+
+            <div class="min-w-full md:min-w-[calc(33.333%-16px)] glass-panel p-8 rounded-2xl flex flex-col gap-6">
+                <div class="flex items-center gap-4">
+                    <img src="https://i.pravatar.cc/150?u=66" class="w-12 h-12 rounded-full border border-primary/30" alt="User">
+                    <div><h4 class="text-white font-bold">James L.</h4><span class="text-slate-500 text-xs uppercase">Executive</span></div>
+                </div>
+                <div class="flex text-primary text-glow"><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">star</span></div>
+                <p class="text-slate-300">"Classy enough for the boardroom, tough enough for the gym. The perfect hybrid."</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="slider-dots" class="flex justify-center gap-3 mt-12">
+    <button class="w-8 h-2.5 rounded-full bg-primary neon-glow transition-all duration-300"></button>
+    <button class="w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-primary transition-all duration-300"></button>
+    <button class="w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-primary transition-all duration-300"></button>
+    <button class="w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-primary transition-all duration-300"></button>
+</div>
+</div>
+</section>
+<section class="py-24 px-6 relative overflow-hidden" id="styles">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[80px]"></div>
+<div class="max-w-[1200px] mx-auto px-8 flex flex-col relative z-10">
+    <div class="flex flex-col gap-1 max-w-2xl mb-12 text-left">
+        <div class="flex items-center gap-3 text-primary">
+            <span class="h-px w-6 bg-primary"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.4em]">Personalization</span>
+        </div>
+        
+    
+            <h2 class="text-4xl md:text-5xl font-bold text-white tracking-tighter leading-[1.1]">
+                CHOOSE YOUR <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-slate-500">AURA</span>
+            </h2>
+            <p class="text-slate-400 text-lg font-body leading-relaxed mt-3">
+                Explore our collection of 20 premium editions, each engineered for a different lifestyle.
+            </p>
+        </div>
+
+        <div id="aura-showcase" class="w-full flex flex-col lg:flex-row items-center justify-between gap-16 bg-white/[0.02] border border-white/10 rounded-[40px] p-12 backdrop-blur-xl relative overflow-hidden group">
+            <div class="relative w-full max-w-[400px] aspect-square flex items-center justify-center">
+                <div id="watch-glow" class="absolute inset-0 bg-primary/20 blur-[120px] rounded-full opacity-30 transition-all duration-700"></div>
+                <img id="main-watch-img" src="https://m.media-amazon.com/images/I/71uV8R6F7tL._AC_SL1500_.jpg" alt="Aura Watch" class="relative z-10 w-full h-auto drop-shadow-[0_20px_50px_rgba(13,204,242,0.3)] transform transition-all duration-700">
+            </div>
+
+            <div class="flex-1 flex flex-col gap-6 text-left">
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col gap-2">
+                        <h3 id="watch-title" class="text-4xl font-bold text-white tracking-tight italic">Neon Cyan</h3>
+                        <p id="watch-series" class="text-primary font-bold tracking-[0.3em] uppercase text-[10px]">Signature Chronos</p>
+                    </div>
+                    <div id="watch-price" class="text-3xl font-bold text-white">$299</div>
+                </div>
+
+                <p id="watch-desc" class="text-slate-400 text-sm font-body leading-relaxed">Aerospace-grade titanium paired with our signature neon finish.</p>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white/5 p-4 rounded-2xl border border-white/5"><span class="text-[10px] text-slate-500 uppercase font-bold block mb-1">Casing</span><span id="spec-material" class="text-white text-sm font-bold">Titanium G5</span></div>
+                    <div class="bg-white/5 p-4 rounded-2xl border border-white/5"><span class="text-[10px] text-slate-500 uppercase font-bold block mb-1">Battery</span><span id="spec-battery" class="text-white text-sm font-bold">7 Days</span></div>
+                    <div class="bg-white/5 p-4 rounded-2xl border border-white/5"><span class="text-[10px] text-slate-500 uppercase font-bold block mb-1">Weight</span><span id="spec-weight" class="text-white text-sm font-bold">42g</span></div>
+                    <div class="bg-white/5 p-4 rounded-2xl border border-white/5"><span class="text-[10px] text-slate-500 uppercase font-bold block mb-1">Tech</span><span id="spec-glass" class="text-white text-sm font-bold">Sapphire</span></div>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Select Your Style</span>
+                    <div id="color-palette" class="flex gap-3 overflow-x-auto pb-4 no-scrollbar">
+                        </div>
+                </div>
+
+                <button id="add-to-collection-btn" class="w-full bg-primary hover:bg-cyan-400 text-background-dark py-5 rounded-2xl font-black transition-all neon-glow flex items-center justify-center gap-2 uppercase tracking-widest text-sm">
+                    Add to Collection <span class="material-symbols-outlined">add_shopping_cart</span>
+               </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="pt-12 pb-24 px-6 relative overflow-hidden" id="accessories">
+<div class="flex flex-col gap-1 max-w-2xl mb-12 text-left px-8">
+    <div class="flex items-center gap-3 text-primary">
+        <span class="h-px w-6 bg-primary"></span>
+        <span class="text-[10px] font-bold uppercase tracking-[0.4em]">Premium Ecosystem</span>
+    </div>
+    
+    <h2 class="text-4xl md:text-5xl font-bold text-white tracking-tighter leading-[1.1]">
+        AURA <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-slate-500">ACCESSORIES</span>
+    </h2>
+    
+    <p class="text-slate-400 text-lg font-body leading-relaxed mt-3">
+        Precision-crafted additions to elevate your daily experience.
+    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="glass-panel p-6 rounded-2xl group hover:border-primary/50 hover:bg-glass-bg transition-all duration-300 flex flex-col">
+<div class="aspect-[4/3] w-full bg-slate-900 rounded-xl mb-6 relative overflow-hidden border border-white/5 group-hover:shadow-[0_0_20px_rgba(13,204,242,0.1)] transition-all">
+    <img src="Photos/band.png" alt="Sport Band" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+</div>
+<h3 class="text-xl font-bold text-white mb-2">Carbon Fiber Sport Band</h3>
+<p class="text-slate-400 text-sm font-body mb-6 flex-grow">Ultra-lightweight weave designed for high-intensity training and breathability.</p>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+<span class="text-2xl font-display font-bold text-primary text-glow">$59</span>
+<a href="Contact & Shipping.html" class="bg-white/5 hover:bg-primary text-white hover:text-background-dark px-5 py-2.5 rounded-full text-sm font-bold transition-all flex items-center gap-2 border border-white/10 hover:border-primary neon-glow no-underline">
+<span>Quick Add</span>
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+</a>
+</div>
+</div>
+
+<div class="glass-panel p-6 rounded-2xl group hover:border-primary/50 hover:bg-glass-bg transition-all duration-300 flex flex-col">
+<div class="aspect-[4/3] w-full bg-slate-900 rounded-xl mb-6 relative overflow-hidden border border-white/5 group-hover:shadow-[0_0_20px_rgba(13,204,242,0.1)] transition-all">
+    <img src="Photos/Bracelet.png" alt="Titanium Bracelet" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+</div>
+<h3 class="text-xl font-bold text-white mb-2">Titanium Link Bracelet</h3>
+<p class="text-slate-400 text-sm font-body mb-6 flex-grow">Aerospace-grade titanium alloy with a diamond-like carbon coating.</p>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+<span class="text-2xl font-display font-bold text-primary text-glow">$149</span>
+<a href="Contact & Shipping.html" class="bg-white/5 hover:bg-primary text-white hover:text-background-dark px-5 py-2.5 rounded-full text-sm font-bold transition-all flex items-center gap-2 border border-white/10 hover:border-primary neon-glow no-underline">
+<span>Quick Add</span>
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+</a>
+</div>
+</div>
+
+<div class="glass-panel p-6 rounded-2xl group hover:border-primary/50 hover:bg-glass-bg transition-all duration-300 flex flex-col">
+<div class="aspect-[4/3] w-full bg-slate-900 rounded-xl mb-6 relative overflow-hidden border border-white/5 group-hover:shadow-[0_0_20px_rgba(13,204,242,0.1)] transition-all">
+    <img src="Photos/charger.png" alt="Wireless Charger" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+</div>
+<h3 class="text-xl font-bold text-white mb-2">Wireless Fast Charger</h3>
+<p class="text-slate-400 text-sm font-body mb-6 flex-grow">Magnetic alignment with 15W rapid charging capability.</p>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+<span class="text-2xl font-display font-bold text-primary text-glow">$39</span>
+<a href="Contact & Shipping.html" class="bg-white/5 hover:bg-primary text-white hover:text-background-dark px-5 py-2.5 rounded-full text-sm font-bold transition-all flex items-center gap-2 border border-white/10 hover:border-primary neon-glow no-underline">
+<span>Quick Add</span>
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-black/40 border-t border-white/5 pt-16 pb-8 px-6">
+<div class="max-w-[1200px] mx-auto flex flex-col gap-12">
+<div class="flex flex-col gap-6 p-8 md:p-12 rounded-2xl bg-gradient-to-r from-primary/10 to-transparent border border-primary/10 w-full">
+    <div class="flex flex-col gap-2 text-center md:text-left">
+        <h3 class="text-2xl font-bold text-white">Join the Waitlist</h3>
+        <p class="text-slate-400 font-body">Connect with us for exclusive updates and early bird pricing.</p>
+    </div>
+    
+    <form action="https://formspree.io/f/xvzqevqe" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input 
+            name="Full Name" 
+            type="text" 
+            placeholder="Your Name" 
+            required 
+            class="bg-background-dark border border-white/10 text-white text-sm rounded-lg px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+        />
+        <input 
+            name="Email" 
+            type="email" 
+            placeholder="Email Address" 
+            required 
+            class="bg-background-dark border border-white/10 text-white text-sm rounded-lg px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+        />
+        <textarea 
+            name="Message" 
+            placeholder="Tell us something... (optional)" 
+            rows="2" 
+            class="md:col-span-2 bg-background-dark border border-white/10 text-white text-sm rounded-lg px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
+        ></textarea>
+        
+        <button type="submit" class="md:col-span-2 bg-primary hover:bg-cyan-400 text-background-dark font-black py-4 rounded-lg transition-all uppercase tracking-widest text-sm neon-glow">
+            Send Message & Join
+        </button>
+    </form>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/5 pt-12">
+<div class="col-span-2 md:col-span-1 flex flex-col gap-6">
+    <a href="#top" class="flex items-center gap-4 group no-underline">
+        <div class="relative size-10 flex items-center justify-center">
+            <div class="absolute inset-0 border border-white/10 rounded-full group-hover:border-primary/40 transition-all duration-700"></div>
+            <svg class="size-5 text-white group-hover:text-primary transition-all duration-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <circle cx="12" cy="12" r="10" stroke-width="1" />
+                <path d="M12 6v6l3 2" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+        </div>
+        <div class="flex flex-col">
+            <h2 class="text-xl font-light tracking-[0.3em] text-white group-hover:text-primary transition-all">AURA</h2>
+            <span class="text-[7px] tracking-[0.5em] text-slate-500 uppercase font-medium">Chronos Edition</span>
+        </div>
+    </a>
+    <p class="text-slate-500 text-sm font-body leading-relaxed">Redefining the relationship between human and machine.</p>
+</div>
+
+<div class="flex flex-col gap-4">
+    <h4 class="text-white font-bold text-sm uppercase tracking-wider">Product</h4>
+    <a class="text-slate-400 hover:text-primary text-sm transition-colors" href="#features">Features</a>
+    <a class="text-slate-400 hover:text-primary text-sm transition-colors" href="#tech">Technology</a>
+    <a class="text-slate-400 hover:text-primary text-sm transition-colors" href="#styles">Styles</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-white font-bold text-sm uppercase tracking-wider">Company</h4>
+<a class="text-slate-400 hover:text-primary text-sm transition-colors" href="about.html">About Us</a>
+<a class="text-slate-400 hover:text-primary text-sm transition-colors" href="careers.html">Careers</a>
+<a class="text-slate-400 hover:text-primary text-sm transition-colors" href="press.html">Press</a>
+</div>
+<div class="flex flex-col gap-4">
+    <h4 class="text-white font-bold text-sm uppercase tracking-wider">Support</h4>
+    <a class="text-slate-400 hover:text-primary text-sm transition-colors" href="help.html">Help Center</a>
+   <a class="text-slate-400 hover:text-primary text-sm transition-colors" href="warranty.html">Warranty</a>
+    <a class="text-slate-400 hover:text-primary text-sm transition-colors" href="contact.html">Contact</a>
+</div>
+</div>
+<div class="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-4">
+                <div class="size-6 border border-white/20 rounded-full flex items-center justify-center">
+                    <svg class="size-3 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10" stroke-width="1.5" />
+                        <path d="M12 6v6l3 2" stroke-width="1.5" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <p class="text-slate-500 text-[10px] uppercase tracking-[0.2em] font-medium">
+                    © 2026 Aura Technologies Inc. All rights reserved.
+                </p>
+            </div>
+            
+            <div class="flex items-center gap-8">
+                <a href="privacy.html" class="text-slate-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] transition-all no-underline font-bold">Privacy Policy</a>
+                <a href="terms.html" class="text-slate-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] transition-all no-underline font-bold">Terms of Service</a>
+            </div>
+        </div>
+        </div> </footer>
+</div>
+<div id="video-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/95 backdrop-blur-md p-4">
+    <div class="relative w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(13,204,242,0.3)]">
+        <button id="close-modal" class="absolute top-6 right-6 z-[110] size-12 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-primary hover:text-black transition-all">
+            <span class="material-symbols-outlined text-3xl">close</span>
+        </button>
+        
+        <video id="aura-video" class="w-full h-full object-contain">
+            <source src="Photos/aura.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+<script>
+const videoModal = document.getElementById('video-modal');
+const auraVideo = document.getElementById('aura-video');
+
+document.addEventListener('click', (e) => {
+    const el = e.target.closest('button, a');
+    if (!el) return;
+
+    // Handle Smooth Scroll & Logo
+    if (el.id === 'home-logo') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+    }
+
+    // Handle Video Modal
+    if (el.id === 'watch-video-btn') {
+        videoModal.classList.remove('hidden');
+        auraVideo.play();
+        return;
+    }
+
+    if (el.id === 'close-modal' || el === videoModal) {
+        videoModal.classList.add('hidden');
+        auraVideo.pause();
+        auraVideo.currentTime = 0;
+        return;
+    }
+
+    // Handle Navigation Anchors
+    const href = el.getAttribute('href');
+    if (href && href.startsWith('#')) {
+        const target = document.querySelector(href);
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+        return;
+    }
+
+    // Handle Redirection to Contact
+    const text = el.innerText?.toLowerCase() || '';
+    if (text.includes('order') || text.includes('buy') || el.id === 'main-preorder-btn') {
+        e.preventDefault();
+        window.location.href = 'Contact & Shipping.html';
+    }
+});
+
+// Learn More Toggle
+function toggleFeature(panelId, button) {
+    const panel = document.getElementById(panelId);
+    const label = button.querySelector('.label');
+    const icon = button.querySelector('.material-symbols-outlined');
+    const isOpening = panel.style.maxHeight === '0px' || !panel.style.maxHeight;
+    
+    panel.style.maxHeight = isOpening ? '200px' : '0px';
+    panel.style.opacity = isOpening ? '1' : '0';
+    label.innerText = isOpening ? 'Show Less' : 'Learn More';
+    icon.style.transform = isOpening ? 'rotate(180deg)' : 'rotate(0deg)';
+}
+
+// 2. TESTIMONIAL SLIDER LOGIC
+let currentSlideIndex = 0;
+function moveSlider(direction) {
+    const slider = document.getElementById('testimonial-slider');
+    const cardsVisible = window.innerWidth >= 768 ? 3 : 1;
+    const maxIndex = slider.children.length - cardsVisible;
+
+    currentSlideIndex += direction;
+    if (currentSlideIndex < 0) currentSlideIndex = 0;
+    if (currentSlideIndex > maxIndex) currentSlideIndex = maxIndex;
+
+    slider.style.transform = `translateX(-${currentSlideIndex * (100 / cardsVisible)}%)`;
+    updateDots(currentSlideIndex);
+    updateActiveHighlight(currentSlideIndex, cardsVisible);
+}
+
+function updateDots(activeIndex) {
+    const dots = document.getElementById('slider-dots').children;
+    for (let i = 0; i < dots.length; i++) {
+        dots[i].className = i === activeIndex 
+            ? "w-8 h-2.5 rounded-full bg-primary neon-glow transition-all duration-300" 
+            : "w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-primary transition-all duration-300";
+    }
+}
+
+function updateActiveHighlight(index, visible) {
+    const cards = document.getElementById('testimonial-slider').children;
+    for (let card of cards) {
+        card.classList.remove('active-card');
+        card.classList.add('border-white/10');
+    }
+    let activePos = (visible === 3) ? index + 1 : index;
+    if (cards[activePos]) {
+        cards[activePos].classList.add('active-card');
+        cards[activePos].classList.remove('border-white/10');
+    }
+}
+
+const auraWatches = [
+  {
+    name: "Neon Cyan",
+    series: "Signature Chronos",
+    price: "$299",
+    color: "#0dccf2",
+    casing: "Titanium G5",
+    battery: "7 Days",
+    weight: "42g",
+    glass: "Sapphire",
+    img: "Photos/neon cyan1.png",
+    desc: "Aerospace-grade titanium paired with our signature neon finish."
+  },
+  {
+    name: "Solar Gold",
+    series: "Signature Chronos",
+    price: "$329",
+    color: "#fbbf24",
+    casing: "Titanium G5",
+    battery: "6 Days",
+    weight: "44g",
+    glass: "Sapphire",
+    img: "Photos/Solar Gold.png",
+    desc: "Luxury gold anodization inspired by solar radiance."
+  },
+  {
+    name: "Obsidian Black",
+    series: "Stealth Edition",
+    price: "$349",
+    color: "#020617",
+    casing: "Carbon Fiber",
+    battery: "8 Days",
+    weight: "39g",
+    glass: "Sapphire",
+    img: "Photos/Obsidian Black.png",
+    desc: "Matte carbon fiber body built for absolute stealth."
+  },
+  {
+    name: "Crimson Pulse",
+    series: "Limited Run",
+    price: "$339",
+    color: "#ef4444",
+    casing: "Titanium G5",
+    battery: "6 Days",
+    weight: "43g",
+    glass: "Sapphire",
+    img: "Photos/crimson pulse.png",
+    desc: "High-energy crimson finish with aggressive styling."
+  },
+  {
+    name: "Aurora Violet",
+    series: "Limited Run",
+    price: "$359",
+    color: "#8b5cf6",
+    casing: "Titanium G5",
+    battery: "7 Days",
+    weight: "41g",
+    glass: "Sapphire",
+    img: "Photos/Aurora Violet.png",
+    desc: "Shifting violet tones inspired by aurora skies."
+  },
+  {
+    name: "Arctic Silver",
+    series: "Signature Chronos",
+    price: "$319",
+    color: "#cbd5e1",
+    casing: "Titanium G5",
+    battery: "7 Days",
+    weight: "42g",
+    glass: "Sapphire",
+    img: "Photos/Arctic Silver.png",
+    desc: "Minimalist silver finish inspired by polar landscapes."
+  },
+  {
+    name: "Forest Green",
+    series: "Expedition Edition",
+    price: "$339",
+    color: "#166534",
+    casing: "Carbon Fiber",
+    battery: "8 Days",
+    weight: "40g",
+    glass: "Sapphire",
+    img: "Photos/Forest Green.png",
+    desc: "Rugged green tone designed for outdoor exploration."
+  },
+  {
+    name: "Midnight Blue",
+    series: "Signature Chronos",
+    price: "$329",
+    color: "#1e3a8a",
+    casing: "Titanium G5",
+    battery: "7 Days",
+    weight: "43g",
+    glass: "Sapphire",
+    img: "Photos/Midnight Blue.png",
+    desc: "Deep blue finish reflecting the calm of midnight skies."
+  },
+  {
+    name: "Rose Quartz",
+    series: "Elegance Edition",
+    price: "$349",
+    color: "#f472b6",
+    casing: "Titanium G5",
+    battery: "6 Days",
+    weight: "41g",
+    glass: "Sapphire",
+    img: "Photos/Rose Quartz.png",
+    desc: "Soft rose tone crafted for refined elegance."
+  },
+  {
+    name: "Inferno Orange",
+    series: "Sport Edition",
+    price: "$329",
+    color: "#f97316",
+    casing: "Carbon Fiber",
+    battery: "7 Days",
+    weight: "40g",
+    glass: "Sapphire",
+    img: "Photos/Inferno Orange.png",
+    desc: "High-visibility orange built for extreme performance."
+  }
+];
+
+
+
+// 1. GENERATE THE 20 BUTTONS
+const palette = document.getElementById('color-palette');
+if (palette) {
+    palette.innerHTML = ''; // Clear old buttons
+    auraWatches.forEach((watch, index) => {
+        const btn = document.createElement('button');
+        // Styling the button
+        btn.className = "min-w-[45px] h-11 rounded-full border-2 border-white/20 transition-all hover:scale-125 shrink-0 hover:border-white";
+btn.dataset.index = index;
+
+        btn.style.backgroundColor = watch.color;
+        btn.onclick = () => updateWatch(index);
+        palette.appendChild(btn);
+    });
+}
+
+// 2. UPDATE FUNCTION: Changes photos, prices, and specs
+function updateWatch(index) {
+  const w = auraWatches[index];
+  
+  // ADD THIS LINE: It saves the selection for the next page
+  localStorage.setItem('selectedWatchIndex', index); 
+
+  document.getElementById("watch-title").innerText = w.name;
+  document.getElementById("watch-series").innerText = w.series;
+  document.getElementById("watch-price").innerText = w.price;
+  document.getElementById("watch-desc").innerText = w.desc;
+
+  document.getElementById("spec-material").innerText = w.casing;
+  document.getElementById("spec-battery").innerText = w.battery;
+  document.getElementById("spec-weight").innerText = w.weight;
+  document.getElementById("spec-glass").innerText = w.glass;
+
+  const img = document.getElementById("main-watch-img");
+  img.style.opacity = "0";
+  
+  setTimeout(() => {
+      img.src = w.img;
+      img.style.filter = "none";
+      img.style.opacity = "1";
+  }, 150);
+
+  const glow = document.getElementById("watch-glow");
+  glow.style.backgroundColor = w.color;
+
+  updateActiveColor(index);
+}
+
+function updateActiveColor(index) {
+  document.querySelectorAll("#color-palette button").forEach(btn => {
+    btn.classList.remove("ring-2", "ring-primary", "scale-110");
+  });
+
+  const activeBtn = document.querySelector(`#color-palette button[data-index='${index}']`);
+  if (activeBtn) {
+    activeBtn.classList.add("ring-2", "ring-primary", "scale-110");
+  }
+}
+updateWatch(0);
+
+// 3. Connect Add to Collection Button to Pre-order Page (Alert Removed)
+document.getElementById('add-to-collection-btn').onclick = function() {
+    // We removed the alert line from here
+    // Redirect instantly to the secure pre-order page
+    window.location.href = 'Contact & Shipping.html';
+};
+document.getElementById('add-to-collection-btn').onclick = function() {
+    // Change text and icon to show progress
+    this.innerHTML = 'REDIRECTING... <span class="material-symbols-outlined animate-spin">sync</span>';
+    
+    // Move to the next page
+    window.location.href = 'Contact & Shipping.html';
+};
+document.getElementById('add-to-collection-btn').onclick = function() {
+    this.innerHTML = 'REDIRECTING... <span class="material-symbols-outlined animate-spin">sync</span>';
+    window.location.href = 'Contact & Shipping.html';
+};
+
+</script>
+
+
+
+
+</body></html>

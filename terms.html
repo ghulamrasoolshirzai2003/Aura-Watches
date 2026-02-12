@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Terms of Service | AURA</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#0dccf2", "background-dark": "#101f22" }, fontFamily: { "display": ["Space Grotesk", "sans-serif"] } } } }
+    </script>
+    <style>
+        .glass-panel { background: rgba(16, 31, 34, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-white antialiased">
+    <header class="fixed top-0 w-full z-50 glass-panel border-b border-white/10">
+        <div class="max-w-[1400px] mx-auto px-8 h-24 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-5 group no-underline">
+                <div class="relative size-14 flex items-center justify-center">
+                    <div class="absolute inset-0 border-2 border-white/10 rounded-full group-hover:border-primary/40 transition-all duration-700"></div>
+                    <svg class="size-8 text-white group-hover:text-primary transition-all duration-700 transform group-hover:rotate-[360deg]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10" stroke-width="1" />
+                        <path d="M12 6v6l3 2" stroke-width="1.5" stroke-linecap="round" />
+                        <path d="M12 3v1M12 20v1M3 12h1M20 12h1" stroke-width="1" />
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <h2 class="text-3xl font-light tracking-[0.4em]">AURA</h2>
+                    <span class="text-[9px] tracking-[0.7em] text-slate-500 uppercase">Chronos Edition</span>
+                </div>
+            </a>
+            <a href="index.html" class="text-xs font-bold uppercase tracking-widest text-primary hover:text-white transition-all">Back to Home</a>
+        </div>
+    </header>
+
+    <main class="pt-48 pb-20 px-6 max-w-[800px] mx-auto font-body leading-relaxed text-slate-300">
+        <h1 class="text-5xl font-bold tracking-tighter mb-12 italic">TERMS OF <span class="text-primary">SERVICE</span></h1>
+        <div class="glass-panel p-10 rounded-[40px] border border-white/10 space-y-8">
+            <section>
+                <h3 class="text-white font-bold text-xl mb-4">1. Acceptance of Terms</h3>
+                <p>By using the AURA Chronos and its neural link ecosystem, you agree to comply with all safety and usage guidelines provided in the manual.</p>
+            </section>
+            <section>
+                <h3 class="text-white font-bold text-xl mb-4">2. Software License</h3>
+                <p>AURA grants you a limited, non-transferable license to use the AURA OS. Modification or reverse engineering of our neural engine is strictly prohibited.</p>
+            </section>
+            <section>
+                <h3 class="text-white font-bold text-xl mb-4">3. Device Warranty</h3>
+                <p>Terms for device repair and replacement are governed by our separate Warranty Policy. AURA is not responsible for data loss due to unauthorized hardware modifications.</p>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

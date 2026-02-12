@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aura Order Tracking</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0dccf2",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#101f22",
+                        "card-dark": "#16262a", // Slightly lighter for cards
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>.glass-panel {
+            background: rgba(22, 38, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-panel-heavy {
+            background: rgba(22, 38, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .neon-glow {
+            box-shadow: 0 0 10px rgba(13, 204, 242, 0.3);
+        }
+        .neon-text-glow {
+            text-shadow: 0 0 8px rgba(13, 204, 242, 0.4);
+        }.bg-tech-grid {
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-white overflow-x-hidden min-h-screen flex flex-col relative">
+<div class="fixed inset-0 pointer-events-none bg-tech-grid opacity-20 z-0"></div>
+<div class="fixed inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#0dccf220] via-transparent to-transparent z-0"></div>
+<nav class="sticky top-0 z-50 glass-panel border-b-0 border-b-white/5">
+    <div class="max-w-[1280px] mx-auto px-6 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+    
+    <a href="index.html" class="flex items-center gap-5 group no-underline shrink-0 transition-transform active:scale-95">
+    <div class="relative size-14 flex items-center justify-center">
+        <div class="absolute inset-0 border-2 border-white/10 rounded-full group-hover:border-primary/40 transition-all duration-700 group-hover:scale-110"></div>
+        <svg class="size-8 text-white group-hover:text-primary transition-all duration-700 ease-in-out transform group-hover:rotate-[360deg]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <circle cx="12" cy="12" r="10" stroke-width="1" />
+            <path d="M12 6v6l3 2" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M12 3v1M12 20v1M3 12h1M20 12h1" stroke-width="1" />
+        </svg>
+        <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+    </div>
+    <div class="flex flex-col">
+        <h2 class="text-3xl font-light tracking-[0.4em] text-white transition-all duration-500 group-hover:tracking-[0.5em] group-hover:text-primary leading-none">
+            AURA
+        </h2>
+        <span class="text-[9px] tracking-[0.7em] text-slate-500 uppercase font-medium group-hover:text-white transition-colors duration-700">Chronos Edition</span>
+    </div>
+</a>
+</div>
+
+        <div class="flex items-center gap-4">
+            <div class="relative flex items-center group">
+                <input type="text" placeholder="Search..." class="w-0 group-hover:w-32 md:group-hover:w-40 bg-white/5 border border-white/10 rounded-full py-1 px-3 text-[10px] text-white focus:outline-none focus:ring-1 focus:ring-primary transition-all duration-300 opacity-0 group-hover:opacity-100">
+                <button class="p-2 text-gray-400 hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">search</span>
+                </button>
+            </div>
+
+            <button onclick="window.location.href='Contact & Shipping.html'" class="p-2 text-gray-400 hover:text-white transition-colors relative">
+                <span class="material-symbols-outlined">shopping_cart</span>
+                <span class="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full neon-glow"></span>
+            </button>
+
+            <button onclick="window.location.href='referral_rewards_dashboard.html'" class="flex items-center gap-2 pl-2 group relative">
+    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-blue-600 flex items-center justify-center text-xs font-bold shadow-lg group-hover:scale-110 transition-transform text-white">JD</div>
+    <span class="absolute -top-1 -right-1 flex h-3 w-3">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-primary border border-background-dark"></span>
+    </span>
+</button>
+        </div>
+    </div>
+</nav>
+<main class="relative z-10 flex-grow py-10 px-6 max-w-[1120px] mx-auto w-full flex flex-col gap-8">
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-white/10">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-3 mb-1">
+<h2 class="text-3xl md:text-4xl font-bold tracking-tight">Order #12345678</h2>
+<span class="px-3 py-1 rounded-full text-xs font-bold bg-primary/20 text-primary border border-primary/20 neon-glow tracking-wider uppercase">In Transit</span>
+</div>
+<p class="text-gray-400 text-sm">Placed on October 20, 2023</p>
+</div>
+<div class="flex gap-3">
+<button onclick="toggleChat(event)" class="glass-panel hover:bg-white/10 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+    <span class="material-symbols-outlined text-[18px]">help</span>
+    Support
+</button>
+</div>
+</header>
+<section class="glass-panel p-8 rounded-2xl w-full overflow-x-auto">
+<div class="min-w-[600px] flex items-center justify-between relative">
+<div class="absolute top-1/2 left-0 w-full h-1 bg-[#283639] -translate-y-1/2 rounded-full z-0"></div>
+<div class="absolute top-1/2 left-0 w-2/3 h-1 bg-gradient-to-r from-primary/50 to-primary -translate-y-1/2 rounded-full z-0 neon-glow"></div>
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary text-black flex items-center justify-center shadow-[0_0_15px_rgba(13,204,242,0.6)]">
+<span class="material-symbols-outlined text-[20px] font-bold">check</span>
+</div>
+<p class="text-primary font-bold text-sm">Placed</p>
+<p class="text-gray-500 text-xs absolute -bottom-6 whitespace-nowrap">Oct 20</p>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary text-black flex items-center justify-center shadow-[0_0_15px_rgba(13,204,242,0.6)]">
+<span class="material-symbols-outlined text-[20px] font-bold">settings</span>
+</div>
+<p class="text-primary font-bold text-sm">Processing</p>
+<p class="text-gray-500 text-xs absolute -bottom-6 whitespace-nowrap">Oct 21</p>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-background-dark border-2 border-primary text-primary flex items-center justify-center shadow-[0_0_20px_rgba(13,204,242,0.4)] ring-4 ring-primary/10">
+<span class="material-symbols-outlined text-[24px] animate-pulse">local_shipping</span>
+</div>
+<p class="text-white font-bold text-sm neon-text-glow">Shipped</p>
+<p class="text-gray-400 text-xs absolute -bottom-6 whitespace-nowrap">Oct 22</p>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-3 opacity-50">
+<div class="w-10 h-10 rounded-full bg-[#283639] border border-white/10 text-gray-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">home</span>
+</div>
+<p class="text-gray-400 font-medium text-sm">Delivered</p>
+</div>
+</div>
+</section>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 flex flex-col gap-6">
+<div class="glass-panel p-6 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div>
+<p class="text-gray-400 text-sm mb-1 uppercase tracking-wider font-semibold">Estimated Arrival</p>
+<h3 class="text-2xl md:text-3xl font-bold text-white">Friday, Oct 24th</h3>
+<p class="text-primary text-sm mt-1 flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                            On Schedule
+                        </p>
+</div>
+
+<div class="w-full md:w-auto">
+<button class="w-full md:w-auto bg-primary text-black hover:bg-cyan-300 font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 neon-glow">
+                            Track Package
+                            <span class="material-symbols-outlined text-lg">open_in_new</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="glass-panel p-1 rounded-2xl h-64 md:h-auto relative overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity duration-500" data-alt="Dark stylized map interface showing city streets at night" data-location="Neo Tokyo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBKeW5O4IqcTTc3Dzb-GwR6VsDmvduvyFXQ_5FgIF_TGDGxvLxiA0vATeDYwrN0kcPR3amOpRYhXAHk8TRtuRZ9t0Jk8BU7jRd1HS7NBHEU0YOm_g0JJ0iFdHNWOYhRTJ3-bR6pGCUnXOArcAYFEMduZ98HKiPWlj0wcIKvUxMTCuG81-Gk_mZ8CSMX0K9uBrCGTJg8irJDl60NADJLTSfSz7cGgJM9gJbwBMMWymrfGpaIWiecZSYe3BgcAf_O9BrdLXOPRZ-jCcc');">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<div class="relative flex items-center justify-center">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-4 w-4 bg-primary neon-glow"></span>
+</div>
+<div class="mt-2 px-3 py-1 glass-panel rounded-full text-xs text-white font-medium border-primary/30">
+                                Current Location
+                            </div>
+</div>
+</div>
+
+<div class="glass-panel p-6 rounded-2xl flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 text-gray-400 mb-4">
+<span class="material-symbols-outlined">location_on</span>
+<span class="text-xs uppercase tracking-wider font-bold">Shipping Address</span>
+</div>
+
+<div class="space-y-1">
+<p class="text-xl font-bold text-white">Jane Doe</p>
+<p class="text-gray-300">123 Cyber Lane, Tech District</p>
+<p class="text-gray-300">Neo Tokyo, 90210</p>
+<p class="text-gray-300">Japan</p>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-white/10">
+<p class="text-xs text-gray-500">Carrier: <span class="text-gray-300">CyberLogistics Express</span></p>
+<p class="text-xs text-gray-500 mt-1">Tracking #: <span class="text-primary cursor-pointer hover:underline">1Z999AA10123456784</span></p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="lg:col-span-1">
+<div class="glass-panel p-6 rounded-2xl h-full flex flex-col">
+<h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">receipt_long</span>
+                        Order Summary
+                    </h3>
+<div class="flex flex-col gap-4 mb-6">
+<div class="w-full aspect-square bg-gradient-to-br from-gray-800 to-black rounded-xl border border-white/5 flex items-center justify-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transform group-hover:scale-105 transition-transform duration-700" data-alt="Close up of a modern smartwatch with a dark screen on a wrist" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCqZmmCkQJcLYJOe1NsK55rdErAREjpaQZmn-bKcdWRP5JuZL7FR3U1jnGJi1jVjW2siswdAxFzRoSlOYbdbGSxrE0H7242q9PtPi0mgfywEhkMCD5MjhsqoBUsd_e4NkPmuHgyigAshMPa_KHpvY5HsTt47mAvug9vr9zz_q6mtv-jqV5O-26XeejFcqC7Xe5g5xFGAccv8q7xE9dBxNxLwyhbFwfC3fLjUf4Lvv1QWZV6QTAN6zlJmYkd4PzfpHUuLrJPi8KKwGE');">
+</div>
+<div class="absolute inset-0 bg-black/20"></div>
+</div>
+<div>
+<h4 class="text-xl font-bold">Aura Watch Series X</h4>
+<p class="text-gray-400 text-sm mt-1">Obsidian Black • 44mm</p>
+<p class="text-gray-400 text-sm">Qty: 1</p>
+</div>
+</div>
+<div class="space-y-3 border-t border-white/10 pt-4 mb-6 flex-grow">
+<div class="flex justify-between text-sm text-gray-400">
+<span>Subtotal</span>
+<span class="text-white">$299.00</span>
+</div>
+<div class="flex justify-between text-sm text-gray-400">
+<span>Shipping</span>
+<span class="text-white">$0.00</span>
+</div>
+<div class="flex justify-between text-sm text-gray-400">
+<span>Tax</span>
+<span class="text-white">$23.92</span>
+</div>
+<div class="flex justify-between text-lg font-bold pt-3 border-t border-white/10 mt-2">
+<span>Total</span>
+<span class="text-primary neon-text-glow">$322.92</span>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</main>
+<footer class="mt-auto py-6 border-t border-white/5 text-center text-gray-600 text-xs relative z-10">
+<p>© 2026 Aura Technologies Inc. All rights reserved.</p>
+</footer>
+<div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4">
+<div id="chat-window" class="hidden w-80 sm:w-96 glass-panel-heavy rounded-2xl overflow-hidden border border-white/10 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)]">
+<div class="bg-gradient-to-r from-primary/10 to-transparent p-4 border-b border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined text-[20px]">support_agent</span>
+</div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-[#16262a] rounded-full neon-glow"></span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-white">Aura Support</h4>
+<p class="text-[10px] text-primary uppercase tracking-widest font-semibold">Online Now</p>
+</div>
+</div>
+<div class="flex items-center gap-1">
+    <button onclick="toggleChat(event)" class="p-1 text-gray-400 hover:text-white transition-colors rounded-full hover:bg-white/5">
+        <span class="material-symbols-outlined text-[18px]">remove</span>
+    </button>
+    <button onclick="toggleChat(event)" class="p-1 text-gray-400 hover:text-white transition-colors rounded-full hover:bg-white/5">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+    </button>
+</div>
+</div>
+<div class="p-4 h-64 overflow-y-auto flex flex-col gap-4 bg-black/20 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+<div class="text-center text-[10px] text-gray-500 uppercase tracking-wider my-1">Today</div>
+<div class="flex items-start gap-3 animate-[fadeIn_0.5s_ease-out]">
+<div class="w-6 h-6 rounded-full bg-gradient-to-tr from-primary to-blue-600 flex-shrink-0 flex items-center justify-center text-[10px] font-bold text-white mt-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">support_agent</span>
+</div>
+<div class="glass-panel bg-white/5 border border-white/5 text-gray-200 p-3 rounded-2xl rounded-tl-none text-sm leading-relaxed shadow-sm max-w-[85%]">
+                        Hello! How can we help with your order?
+                     </div>
+</div>
+<div class="flex items-start gap-3 flex-row-reverse animate-[fadeIn_0.5s_ease-out_0.2s_both]">
+<div class="w-6 h-6 rounded-full bg-gray-700 flex-shrink-0 flex items-center justify-center text-[10px] font-bold text-white mt-1">JD</div>
+<div class="bg-primary/20 border border-primary/20 text-white p-3 rounded-2xl rounded-tr-none text-sm leading-relaxed shadow-sm max-w-[85%]">
+                       Just checking when my watch arrives!
+                    </div>
+</div>
+<div class="flex items-start gap-3 animate-[fadeIn_0.5s_ease-out_0.5s_both]">
+<div class="w-6 h-6 rounded-full bg-gradient-to-tr from-primary to-blue-600 flex-shrink-0 flex items-center justify-center text-[10px] font-bold text-white mt-1 opacity-50">
+<span class="material-symbols-outlined text-[14px]">support_agent</span>
+</div>
+<div class="glass-panel bg-white/5 border border-white/5 p-3 rounded-2xl rounded-tl-none flex items-center gap-1 h-10 w-16">
+<span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></span>
+<span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+<span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+</div>
+</div>
+</div>
+<div class="p-3 bg-[#16262a]/90 backdrop-blur-md border-t border-white/5">
+<div class="relative group">
+<input class="w-full bg-[#0f1a1d] border border-primary/40 rounded-full py-2.5 pl-4 pr-11 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all shadow-[0_0_10px_rgba(13,204,242,0.05)] focus:shadow-[0_0_15px_rgba(13,204,242,0.15)]" placeholder="Type your message..." type="text"/>
+<button class="absolute right-1 top-1/2 -translate-y-1/2 w-8 h-8 bg-primary rounded-full text-black hover:bg-cyan-300 transition-colors flex items-center justify-center shadow-lg hover:shadow-cyan-400/50">
+<span class="material-symbols-outlined text-[16px] ml-0.5">send</span>
+</button>
+</div>
+<div class="flex justify-center mt-2">
+<p class="text-[10px] text-gray-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-[10px]">lock</span>
+                        Encrypted Chat
+                    </p>
+</div>
+</div>
+</div>
+<button onclick="toggleChat()" class="w-14 h-14 rounded-full glass-panel ...">
+    <span class="material-symbols-outlined text-[28px] text-primary">chat_bubble</span>
+</button>
+</div>
+<script>
+    // 1. Data Definitions
+    const auraWatches = [
+      { name: "Neon Cyan", series: "Signature Chronos", price: "$299.00", img: "Photos/neon cyan1.png" },
+      { name: "Solar Gold", series: "Signature Chronos", price: "$329.00", img: "Photos/Solar Gold.png" },
+      { name: "Obsidian Black", series: "Stealth Edition", price: "$349.00", img: "Photos/Obsidian Black.png" },
+      { name: "Crimson Pulse", series: "Limited Run", price: "$339.00", img: "Photos/crimson pulse.png" },
+      { name: "Aurora Violet", series: "Limited Run", price: "$359.00", img: "Photos/Aurora Violet.png" },
+      { name: "Arctic Silver", series: "Signature Chronos", price: "$319.00", img: "Photos/Arctic Silver.png" },
+      { name: "Forest Green", series: "Expedition Edition", price: "$339.00", img: "Photos/Forest Green.png" },
+      { name: "Midnight Blue", series: "Signature Chronos", price: "$329.00", img: "Photos/Midnight Blue.png" },
+      { name: "Rose Quartz", series: "Elegance Edition", price: "$349.00", img: "Photos/Rose Quartz.png" },
+      { name: "Inferno Orange", series: "Sport Edition", price: "$329.00", img: "Photos/Inferno Orange.png" }
+    ];
+
+    const auraAccessories = {
+        "Aura Screen Protector": { price: "$19.99", img: "Photos/security.png", series: "Security Gear", index: 100 },
+        "Extra Charging Cable": { price: "$24.99", img: "Photos/cable.png", series: "Power Gear", index: 101 },
+        "Silicone Flex Band": { price: "$29.99", img: "Photos/watch.png", series: "Style Gear", index: 102 },
+        "Wireless Charging Dock": { price: "$44.99", img: "Photos/dock.png", series: "Power Gear", index: 103 }
+    };
+
+    // 2. Buy Process Logic
+    function buyAccessory(name) {
+        const item = auraAccessories[name.trim()];
+        if (!item) return;
+
+        // Save this accessory selection so the Shipping/Payment pages recognize it
+        localStorage.setItem('selectedWatchIndex', item.index);
+        
+        // Redirect to the beginning of the buying process
+        window.location.href = 'Contact & Shipping.html';
+    }
+
+    // 3. Initialize Everything
+   window.onload = () => {
+        // 1. Get the correct item index from memory
+        const savedIndex = localStorage.getItem('selectedWatchIndex');
+        const i = savedIndex !== null ? parseInt(savedIndex) : 0;
+
+        let currentItem;
+        let displayName;
+
+        // 2. Identify if it's a watch (0-9) or an accessory (100+)
+        if (i >= 100) {
+            const accKeys = Object.keys(auraAccessories);
+            const key = accKeys.find(k => auraAccessories[k].index === i);
+            currentItem = auraAccessories[key];
+            displayName = key;
+        } else {
+            currentItem = auraWatches[i];
+            displayName = "Aura " + currentItem.name;
+        }
+
+        // 3. Update the Order Summary Text and Price
+        document.querySelector('.lg\\:col-span-1 h4').innerText = displayName;
+        document.querySelector('.text-primary.neon-text-glow').innerText = currentItem.price;
+
+        // 4. Update the Image and FIX the "triple image" repeat
+        const imgDiv = document.querySelector('.lg\\:col-span-1 .bg-cover');
+        if (imgDiv) {
+            imgDiv.style.backgroundImage = `url('${currentItem.img}')`;
+            imgDiv.style.backgroundSize = 'contain';
+            imgDiv.style.backgroundRepeat = 'no-repeat'; // Stops the triple image
+            imgDiv.style.backgroundPosition = 'center';   // Centers it
+        }
+
+        // Load Customer Data
+        const rawData = localStorage.getItem('customerShippingData');
+        if (rawData) {
+            const data = JSON.parse(rawData);
+            const addressBox = document.querySelector('.glass-panel .space-y-1');
+            if (addressBox) {
+                addressBox.innerHTML = `
+                    <p class="text-xl font-bold text-white">${data.firstName} ${data.lastName}</p>
+                    <p class="text-gray-300">${data.address}</p>
+                    <p class="text-gray-300">${data.city}, ${data.zip}</p>
+                    <p class="text-gray-300">Verified Destination</p>
+                `;
+            }
+        }
+
+        // 4. Activate "Add" buttons to start buying process
+        document.querySelectorAll('button').forEach(btn => {
+            if (btn.innerText.toUpperCase().includes('ADD')) {
+                btn.onclick = (e) => {
+                    e.preventDefault();
+                    const card = btn.closest('.glass-panel');
+                    const name = card.querySelector('h4').innerText;
+                    buyAccessory(name);
+                };
+            }
+        });
+    };
+
+    function toggleChat(e) {
+        if (e) e.stopPropagation();
+        const chatWindow = document.getElementById('chat-window');
+        if (chatWindow) chatWindow.classList.toggle('hidden');
+    }
+</script>
+
+</body></html>

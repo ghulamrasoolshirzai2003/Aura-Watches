@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Aura Checkout | Payment</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: { "primary": "#0dccf2", "background-dark": "#101f22", "surface-dark": "#162629", "input-dark": "#1c2e32" },
+                    fontFamily: { "display": ["Space Grotesk", "sans-serif"] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel { background: rgba(16, 31, 34, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .shimmer-text { background: linear-gradient(to right, #cbd5e1, #ffffff, #64748b); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 5s linear infinite; }
+        @keyframes shimmer { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+   /* This ensures the image never touches the borders */
+#final-watch-img {
+    max-height: 180px !important; /* Forces the image to stay small enough */
+    width: auto !important;
+    object-fit: contain !important;
+    margin: 0 auto;
+    display: block;
+    padding-bottom: 10px; /* Creates space so the bottom is never hidden */
+}
+
+/* Add this to the wrapper to center the watch perfectly */
+/* 1. Shrink the image slightly more to make room for text */
+#final-watch-img {
+    max-height: 160px !important; /* Shrunk from 180px to 160px */
+    width: auto !important;
+    object-fit: contain !important;
+    margin: 0 auto;
+    display: block;
+}
+
+/* 2. Center the image and remove extra bottom padding */
+.aspect-square {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 10px !important; /* Reduced padding from 20px */
+}
+
+/* 3. Pull the text section up by reducing the top margin */
+.mt-8 {
+    margin-top: 1rem !important; /* Tightens the gap between image and text */
+}
+
+/* 4. Reduce the gap between the Edition and the Name */
+.space-y-1 > * + * {
+    margin-top: 0.125rem !important;
+}
+/* 1. Add bottom padding to the entire left column to lift all content */
+.md\:w-5\/12 {
+    padding-bottom: 40px !important; /* Forces a gap at the bottom of the box */
+}
+
+/* 2. Tighten the space specifically under the watch image */
+.mb-8 {
+    margin-bottom: 1rem !important; /* Reduces the gap to pull text up */
+}
+
+/* 3. Ensure the text wrapper doesn't expand too far down */
+.space-y-1 {
+    margin-bottom: 10px !important;
+}
+
+/* 4. Fine-tune the specific Inferno Orange text height */
+#final-name {
+    line-height: 1.1 !important;
+    padding-bottom: 5px;
+}
+   </style>
+</head>
+<body class="bg-background-dark font-display antialiased overflow-hidden h-screen w-full relative">
+
+<div class="relative z-10 flex h-full w-full items-center justify-center p-4">
+    <div class="glass-panel w-full max-w-5xl max-h-[90vh] rounded-[40px] shadow-2xl flex flex-col md:flex-row overflow-hidden">
+        
+        <div class="w-full md:w-5/12 bg-surface-dark/50 border-r border-white/5 p-10 flex flex-col justify-between">
+            <div>
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest mb-8">
+                    <span class="material-symbols-outlined text-sm">verified</span> Verified Selection
+                </span>
+
+                <div class="relative aspect-square rounded-[32px] bg-white/5 flex items-center justify-center mb-8 border border-white/5">
+                    <img id="final-watch-img" src="Photos/neon cyan1.png" class="w-2/3 h-auto object-contain drop-shadow-[0_20px_50px_rgba(13,204,242,0.3)]" alt="Watch">
+                </div>
+
+                <div class="space-y-1">
+                    <p id="final-series" class="text-primary text-[10px] font-black uppercase tracking-[0.3em]">Signature Chronos</p>
+                    <h2 id="final-name" class="text-3xl font-bold text-white italic tracking-tight">Neon Cyan</h2>
+                </div>
+            </div>
+
+            <div class="pt-6 border-t border-white/10 mt-8">
+                <div class="flex justify-between items-end">
+                    <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Grand Total</p>
+                    <h2 id="final-price" class="text-3xl font-bold text-white tracking-tighter shimmer-text">$299</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full md:w-7/12 flex flex-col bg-transparent overflow-y-auto">
+            <div class="px-10 py-8 sticky top-0 bg-[#101f22]/95 backdrop-blur-md z-20 border-b border-white/5 flex justify-between items-center">
+                <h1 class="text-white text-xl font-bold flex items-center gap-4 italic">
+                    <span class="material-symbols-outlined text-primary">lock_person</span> Secure Payment
+                </h1>
+            </div>
+
+            <div class="px-10 py-10 flex-1">
+                <div class="flex flex-col gap-3 mb-10">
+                    <div class="flex justify-between items-end">
+                        <p class="text-primary text-xs font-bold uppercase">Final Step</p>
+                        <p class="text-slate-400 text-xs uppercase tracking-widest">Secure Encryption</p>
+                    </div>
+                    <div class="h-1 w-full bg-white/10 rounded-full">
+                        <div class="h-full bg-primary rounded-full" style="width: 100%;"></div>
+                    </div>
+                </div>
+
+                <form id="payment-form" class="space-y-6">
+                    <div class="space-y-4">
+                        <label class="text-[10px] text-slate-500 font-bold uppercase tracking-widest ml-1">Card Information</label>
+                        <div class="relative">
+                            <input class="w-full bg-input-dark text-white rounded-xl border border-white/5 px-4 py-4 pl-12 focus:border-primary outline-none transition-all font-mono" type="text" placeholder="0000 0000 0000 0000" required>
+                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-600">credit_card</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <input class="bg-input-dark text-white rounded-xl border border-white/5 px-4 py-4 text-center focus:border-primary outline-none transition-all" type="text" placeholder="MM / YY" required>
+                            <input class="bg-input-dark text-white rounded-xl border border-white/5 px-4 py-4 text-center focus:border-primary outline-none transition-all" type="text" placeholder="CVV" required>
+                        </div>
+                    </div>
+                    <div class="space-y-4 pt-4">
+                        <label class="text-[10px] text-slate-500 font-bold uppercase tracking-widest ml-1">Cardholder Name</label>
+                        <input class="w-full bg-input-dark text-white rounded-xl border border-white/5 px-4 py-4 focus:border-primary outline-none transition-all uppercase" type="text" placeholder="ALEXANDER SMITH" required>
+                    </div>
+                </form>
+            </div>
+
+            <div class="px-10 py-8 border-t border-white/5 bg-[#101f22]/95 backdrop-blur-md sticky bottom-0 flex justify-between items-center">
+                <button onclick="window.history.back()" class="text-slate-500 hover:text-white text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm">arrow_back</span> Back
+                </button>
+                <button form="payment-form" type="submit" class="bg-primary hover:bg-cyan-400 text-background-dark font-black px-12 py-4 rounded-xl text-[10px] uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(13,204,242,0.3)]">
+                    Confirm Order
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Watch data must match the previous pages
+    const auraWatches = [
+      { name: "Neon Cyan", series: "Signature Chronos", price: "$299", img: "Photos/neon cyan1.png" },
+      { name: "Solar Gold", series: "Signature Chronos", price: "$329", img: "Photos/Solar Gold.png" },
+      { name: "Obsidian Black", series: "Stealth Edition", price: "$349", img: "Photos/Obsidian Black.png" },
+      { name: "Crimson Pulse", series: "Limited Run", price: "$339", img: "Photos/crimson pulse.png" },
+      { name: "Aurora Violet", series: "Limited Run", price: "$359", img: "Photos/Aurora Violet.png" },
+      { name: "Arctic Silver", series: "Signature Chronos", price: "$319", img: "Photos/Arctic Silver.png" },
+      { name: "Forest Green", series: "Expedition Edition", price: "$339", img: "Photos/Forest Green.png" },
+      { name: "Midnight Blue", series: "Signature Chronos", price: "$329", img: "Photos/Midnight Blue.png" },
+      { name: "Rose Quartz", series: "Elegance Edition", price: "$349", img: "Photos/Rose Quartz.png" },
+      { name: "Inferno Orange", series: "Sport Edition", price: "$329", img: "Photos/Inferno Orange.png" }
+    ];
+
+    // LOAD THE CHOSEN WATCH FROM LOCALSTORAGE
+    window.onload = () => {
+        const savedIndex = localStorage.getItem('selectedWatchIndex');
+        const index = savedIndex !== null ? parseInt(savedIndex) : 0;
+        const w = auraWatches[index];
+
+        document.getElementById('final-name').innerText = w.name;
+        document.getElementById('final-series').innerText = w.series;
+        document.getElementById('final-price').innerText = w.price;
+        document.getElementById('final-watch-img').src = w.img;
+    };
+
+    // FORM REDIRECTION
+    document.getElementById('payment-form').onsubmit = (e) => {
+        e.preventDefault();
+        window.location.href = 'order_success_screen.html'; // Navigates to final screen
+    };
+</script>
+</body>
+</html>
